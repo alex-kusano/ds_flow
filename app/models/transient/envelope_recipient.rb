@@ -20,9 +20,12 @@ class EnvelopeRecipient
   
   def match( criteria )
     
-    ( criteria[:type].nil? or @type == criteria[:type] ) and
-    ( criteria[:routing_order].nil? or @routing_order == criteria[:routing_order] ) and
-    ( criteria[:status].nil? or @status == criteria[:status] )
+    ( (ctype=criteria[:type]).nil? or 
+      ctype.is_a?(Array) ? ctype.include?(@type) : ctype == @type ) and
+    ( (corder=criteria[:routing_order]).nil? or 
+      corder.is_a?(Array) ? corder.include?(@routing_order) : corder == @routing_order ) and
+    ( (cstatus=criteria[:status]).nil? or 
+      cstatus.is_a?(Array) ? cstatus.include?(@status) : cstatus == @status )
     
   end
   
