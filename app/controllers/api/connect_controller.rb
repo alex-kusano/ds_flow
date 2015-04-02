@@ -7,13 +7,18 @@ class Api::ConnectController < ApplicationController
     envelope_info = EnvelopeInformation.new ( params[:DocuSignEnvelopeInformation] )
     
     flow_handler = FlowHandler.instance
-    flow_handler.envelope_sent( emvelope_info )
+    result = flow_handler.envelope_sent( envelope_info ) 
     
-    render xml: envelope_info
+    render json: result
   end
   
   def signed
+    envelope_info = EnvelopeInformation.new ( params[:DocuSignEnvelopeInformation] )
     
+    flow_handler = FlowHandler.instance
+    result = flow_handler.envelope_signed( envelope_info )
+    
+    render json: result
   end
   
 end

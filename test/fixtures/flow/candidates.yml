@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  flow_instance_id: 
+  routing_order: 1
+  employment_id: 
+
+two:
+  flow_instance_id: 
+  routing_order: 1
+  employment_id: 

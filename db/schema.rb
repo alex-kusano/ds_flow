@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150330013557) do
+ActiveRecord::Schema.define(version: 20150330133016) do
 
   create_table "companies", force: true do |t|
     t.string   "name"
@@ -48,6 +48,20 @@ ActiveRecord::Schema.define(version: 20150330013557) do
   add_index "employments", ["company_id", "role_id"], name: "index_employments_on_company_id_and_role_id"
   add_index "employments", ["company_id"], name: "index_employments_on_company_id"
   add_index "employments", ["contact_id"], name: "index_employments_on_contact_id"
+
+  create_table "flow_candidates", force: true do |t|
+    t.integer  "flow_instance_id"
+    t.integer  "routing_order"
+    t.integer  "employment_id"
+    t.datetime "sign_date"
+    t.string   "recipient_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "flow_candidates", ["employment_id"], name: "index_flow_candidates_on_employment_id"
+  add_index "flow_candidates", ["flow_instance_id", "routing_order"], name: "index_flow_candidates_on_flow_instance_id_and_routing_order"
+  add_index "flow_candidates", ["flow_instance_id"], name: "index_flow_candidates_on_flow_instance_id"
 
   create_table "flow_flow_instances", force: true do |t|
     t.string   "code"

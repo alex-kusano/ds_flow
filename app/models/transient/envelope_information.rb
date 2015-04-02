@@ -13,7 +13,7 @@ class EnvelopeInformation
       @envelope_status = envelope_data[:Status]
       
       extract_params(envelope_data)
-      extract_recipients(envelope_data)
+      extract_recipients(envelope_data)      
     end
   end
   
@@ -23,8 +23,8 @@ class EnvelopeInformation
   end
   
   def get_recipients( criteria = {} )     
-    @recipients.select do |candidate|
-      candidate.match( criteria )
+    @recipients.select do |recipient|
+      recipient.match( criteria )
     end
   end
   
@@ -45,14 +45,20 @@ class EnvelopeInformation
   
   #
   def extract_recipients( envelope_data )
-    recipient_list = envelope_data[:RecipientStatuses][:RecipientStatus]
+    result = envelope_data[:RecipientStatuses][:RecipientStatus]
+    
     @recipients = []
-    if not recipient_list.blank?
-      recipient_list.each do |recipient_data|
-        recipient = EnvelopeRecipient.new(recipient_data)
+    
+    unless result.nil?
+      if result.is_a?(Array) 
+        result.each do |recipient_data|
+          recipient = EnvelopeRecipient.new(recipient_data)
+          @recipients.push recipient
+        end        
+      else
+        recipient = EnvelopeRecipient.new(result)
         @recipients.push recipient
       end
     end
-  end
-  
+  end  
 end

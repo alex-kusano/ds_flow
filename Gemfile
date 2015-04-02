@@ -31,6 +31,9 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 # XML params parse 
 gem 'actionpack-xml_parser'
 
+# UUID tools for GUID generation
+gem 'uuidtools'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
