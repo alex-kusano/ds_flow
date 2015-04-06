@@ -1,0 +1,32 @@
+<%= form_for(@criterium) do |f| %>
+  <% if @criterium.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@criterium.errors.count, "error") %> prohibited this criterium from being saved:</h2>
+
+      <ul>
+      <% @criterium.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :rule %>
+    <%= f.collection_select :rule_id, get_rules, :id, :to_s, :selected => get_selected_rule(@criterium) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :role %>
+      <%= f.collection_select :role_id, get_roles, :id, :to_s, :selected => get_selected_role(@criterium) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :count %>
+    <%= f.number_field :count %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,27 @@
+<h1>Listing rule_sets</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Routing Order</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rule_sets.each do |rule_set| %>
+      <tr>
+        <td><%= rule_set.code %></td>
+        <td><%= rule_set.routing_order %></td>
+        <td><%= link_to 'Show', rule_set %></td>
+        <td><%= link_to 'Edit', edit_rule_set_path(rule_set) %></td>
+        <td><%= link_to 'Destroy', rule_set, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Rule set', new_rule_set_path %>

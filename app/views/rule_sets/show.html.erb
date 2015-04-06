@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @rule_set.code %>
+</p>
+<p>
+  <strong>Routing Order:</strong>
+  <%= @rule_set.routing_order %>
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Rule</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @rule_set.rules.each do |rule| %>
+    <tr>
+      <td><%= rule %></td>
+      <td><%= link_to 'Edit', rule_path( build_rule_set_params rule ) %></td>
+      <td><%= link_to 'Destroy', rule, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="3"><%= link_to 'Add Rule', new_rule_path( build_rule_set_params ) %></td>      
+    </tr>
+  </tfoot>
+</table>
+
+<%= link_to 'Edit', edit_rule_set_path(@rule_set) %> |
+<%= link_to 'Back', rule_sets_path %>

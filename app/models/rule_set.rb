@@ -10,6 +10,14 @@ class RuleSet < ActiveRecord::Base
     return false
   end
   
+  def to_s
+    "#{code}@#{routing_order}"
+  end
+  
+  #####################################################################
+  # Class Methods
+  #####################################################################
+  
   def self.get_rule_sets( code, routing_order )    
     RuleSet.where( code: code, routing_order: routing_order ).joins( rules: [ criteria: :role ] ).includes( rules: [ criteria: :role ] )
   end
@@ -17,4 +25,5 @@ class RuleSet < ActiveRecord::Base
   def self.get_associated_role_ids( code, routing_order )
     role_ids = Criterium.distinct.joins(rule: [:rule_set]).where(rule_sets: {code: code, routing_order: routing_order}).pluck(:role_id)    
   end
+  
 end

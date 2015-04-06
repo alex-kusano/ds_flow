@@ -20,6 +20,8 @@ module DsFlow
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
     
+    config.action_controller.include_all_helpers = false
+    
     config.middleware.insert_after ActionDispatch::ParamsParser, ActionDispatch::XmlParamsParser
     
   end

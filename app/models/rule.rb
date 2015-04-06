@@ -2,6 +2,14 @@ class Rule < ActiveRecord::Base
   belongs_to :rule_set
   has_many   :criteria
   
+  def to_s
+    if criteria.blank?
+      "No Criteria!"
+    else
+      criteria.to_a.join(' AND ')
+    end
+  end
+  
   def validate_rule( count_map )
     
     criteria.each do |criterium|
@@ -10,4 +18,6 @@ class Rule < ActiveRecord::Base
     
     return true
   end
+  
+  
 end

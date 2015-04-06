@@ -1,9 +1,18 @@
 Rails.application.routes.draw do
+  
   namespace :api do
     post  'connect/sent'    =>    'connect#sent'
     post  'connect/signed'  =>    'connect#signed'
   end
 
+  resources :contacts
+  resources :companies
+  resources :roles
+  resources :employments, only: [:index, :new, :create, :destroy]
+  resources :rule_sets
+  resources :rules
+  resources :criteria
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
