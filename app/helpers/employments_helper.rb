@@ -43,5 +43,12 @@ module EmploymentsHelper
       return "#{employment.contact_id}"
     end
   end
+  
+  def get_back_path
+    unless params[:company_id].nil? 
+      return company_path( id: params[:company_id] )
+    end
+    employments_path
+  end
 
 end

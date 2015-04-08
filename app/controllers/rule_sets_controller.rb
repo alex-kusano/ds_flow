@@ -4,7 +4,7 @@ class RuleSetsController < ApplicationController
   # GET /rule_sets
   # GET /rule_sets.json
   def index
-    @rule_sets = RuleSet.all.order(:code, :routing_order)
+    @rule_sets = RuleSet.all.order(:code)
   end
 
   # GET /rule_sets/1

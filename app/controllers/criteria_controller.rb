@@ -28,7 +28,11 @@ class CriteriaController < ApplicationController
 
     respond_to do |format|
       if @criterium.save
-        format.html { redirect_to @criterium, notice: 'Criterium was successfully created.' }
+        format.html {           
+          redirect_to rule_path( id: @criterium.rule.id, 
+                                 rule_set_id: @criterium.rule.rule_set.id ),
+                      notice: 'Criterium was successfully created.'
+        }
         format.json { render :show, status: :created, location: @criterium }
       else
         format.html { render :new }
@@ -56,7 +60,14 @@ class CriteriaController < ApplicationController
   def destroy
     @criterium.destroy
     respond_to do |format|
-      format.html { redirect_to criteria_url, notice: 'Criterium was successfully destroyed.' }
+      format.html { 
+        if params[:rule_id].nil? 
+          redirect_to criteria_url, notice: 'Criterium was successfully destroyed.', rule_id: params[:rule_id], rule_set_id: params[:rule_set_id] 
+        else
+          redirect_to rule_url( notice: 'Criterium was successfully destroyed.', id: params[:rule_id], rule_set_id: params[:rule_set_id] )
+        end
+        
+      }
       format.json { head :no_content }
     end
   end

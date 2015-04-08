@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   
+  resources :categories
+
+  root    'static_pages#home'
+  
   namespace :api do
     post  'connect/sent'    =>    'connect#sent'
     post  'connect/signed'  =>    'connect#signed'
@@ -8,10 +12,14 @@ Rails.application.routes.draw do
   resources :contacts
   resources :companies
   resources :roles
-  resources :employments, only: [:index, :new, :create, :destroy]
+  resources :employments
   resources :rule_sets
   resources :rules
   resources :criteria
+  
+  get  'accounts'           =>    'ds_accounts#index'
+  post 'accounts'           =>    'ds_accounts#create'
+  get  'accounts/register'  =>    'ds_accounts#register'
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -11,7 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150330133016) do
+ActiveRecord::Schema.define(version: 20150408124007) do
+
+  create_table "categories", force: true do |t|
+    t.integer  "company_id"
+    t.string   "tab_name"
+    t.string   "tab_value"
+    t.integer  "datatype"
+    t.integer  "operation"
+    t.string   "code"
+    t.integer  "parent_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "categories", ["company_id"], name: "index_categories_on_company_id"
+  add_index "categories", ["parent_id"], name: "index_categories_on_parent_id"
 
   create_table "companies", force: true do |t|
     t.string   "name"
@@ -37,6 +52,14 @@ ActiveRecord::Schema.define(version: 20150330133016) do
   add_index "criteria", ["role_id"], name: "index_criteria_on_role_id"
   add_index "criteria", ["rule_id"], name: "index_criteria_on_rule_id"
 
+  create_table "ds_accounts", force: true do |t|
+    t.string   "username"
+    t.string   "email"
+    t.string   "token"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "employments", force: true do |t|
     t.integer  "company_id"
     t.integer  "contact_id"
@@ -51,7 +74,6 @@ ActiveRecord::Schema.define(version: 20150330133016) do
 
   create_table "flow_candidates", force: true do |t|
     t.integer  "flow_instance_id"
-    t.integer  "routing_order"
     t.integer  "employment_id"
     t.datetime "sign_date"
     t.string   "recipient_id"
@@ -60,14 +82,17 @@ ActiveRecord::Schema.define(version: 20150330133016) do
   end
 
   add_index "flow_candidates", ["employment_id"], name: "index_flow_candidates_on_employment_id"
-  add_index "flow_candidates", ["flow_instance_id", "routing_order"], name: "index_flow_candidates_on_flow_instance_id_and_routing_order"
   add_index "flow_candidates", ["flow_instance_id"], name: "index_flow_candidates_on_flow_instance_id"
+  add_index "flow_candidates", ["flow_instance_id"], name: "index_flow_candidates_on_flow_instance_id_and_routing_order"
 
   create_table "flow_flow_instances", force: true do |t|
     t.string   "code"
     t.string   "envelope_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "routing_order"
+    t.datetime "complete_date"
+    t.integer  "company_id"
   end
 
   add_index "flow_flow_instances", ["code", "envelope_id"], name: "index_flow_flow_instances_on_code_and_envelope_id"
@@ -80,7 +105,6 @@ ActiveRecord::Schema.define(version: 20150330133016) do
 
   create_table "rule_sets", force: true do |t|
     t.string   "code"
-    t.integer  "routing_order"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

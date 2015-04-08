@@ -26,4 +26,11 @@ module RulesHelper
     end
     built_params
   end
+
+  def get_back_path
+    unless params[:rule_set_id].nil?
+      return rule_set_path( id: params[:rule_set_id] )
+    end
+    rules_path
+  end
 end

@@ -1,34 +1,40 @@
 <p id="notice"><%= notice %></p>
 
+<h2>Detalhes da Empresa</h2>
+<hr>
 <p>
-  <strong>Name:</strong>
-  <%= @company.name %>
-  
-  <table>
-    <thead>
-      <tr>
-        <th>Role</th>
-        <th>Contact</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @company.employments.each do |employment| %>
-      <tr>
-        <td><%= employment.role %></td>
-        <td><%= employment.contact %></td>
-        <td><%= link_to 'Destroy', employment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-      <% end %>
-    </tbody>
-    <tfoot>
-      <tr>
-        <td><%= link_to 'Add Employee', new_employment_path( build_company_params @company ) %></td>
-        <td colspan="2"></td>
-      </tr>
-    </tfoot>
-  </table>
+  <h4>
+    <strong>Nome:</strong>
+    <%= @company.name %>  
+  </h4>
 </p>
+
+<h4>Procura&ccedil;&otilde;es:</h4>
+<table>
+  <thead>
+    <tr>
+      <th>Cargo</th>
+      <th>Signat&aacute;rio</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @company.employments.each do |employment| %>
+    <tr>
+      <td><%= employment.role %></td>
+      <td><%= employment.contact %></td>
+      <td><%= link_to 'Destroy', employment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td><%= link_to 'Add Employee', new_employment_path( build_company_params @company ) %></td>
+      <td colspan="2"></td>
+    </tr>
+  </tfoot>
+</table>
+<br>
 
 <%= link_to 'Edit', edit_company_path(@company) %> |
 <%= link_to 'Back', companies_path %>

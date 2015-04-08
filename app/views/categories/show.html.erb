@@ -1,0 +1,71 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Company:</strong>
+  <%= @category.company %>
+</p>
+<p>
+  <strong>Tab name:</strong>
+  <%= @category.tab_name %>
+</p>
+
+<p>
+  <strong>Value:</strong>
+  <%= @category.tab_value %>
+</p>
+
+<p>
+  <strong>Datatype:</strong>
+  <%= @category.datatype_string %>
+</p>
+
+<p>
+  <strong>Operation:</strong>
+  <%= @category.operation_string %>
+</p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @category.code %>
+</p>
+
+<p>
+  <strong>Parent:</strong>
+  <%= @category.parent %>
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Company</th>
+      <th>Tab name</th>
+      <th>Value</th>
+      <th>Datatype</th>
+      <th>Operation</th>
+      <th>Code</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @category.subcategories.each do |subcategory| %>
+    <tr>
+      <td><%= subcategory.company %></td>
+      <td><%= subcategory.tab_name %></td>
+      <td><%= subcategory.tab_value %></td>
+      <td><%= subcategory.datatype_string %></td>
+      <td><%= subcategory.operation_string %></td>
+      <td><%= subcategory.code %></td>
+      <td><%= link_to 'Edit', edit_category_path( build_category_params subcategory ) %></td>
+      <td><%= link_to 'Destroy', subcategory, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="3"><%= link_to 'Add Subcategory', new_category_path( build_category_params ) %></td>      
+    </tr>
+  </tfoot>
+</table>  
+
+<%= link_to 'Edit', edit_category_path(@category) %> |
+<%= link_to 'Back', categories_path %>

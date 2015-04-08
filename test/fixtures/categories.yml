@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+string_cat:
+  tab_name: AUTO_STRING
+  tab_value: a string
+  datatype: 0
+  operation: 0
+
+number_cat:
+  tab_name: AUTO_NUMBER
+  tab_value: 123
+  datatype: 2
+  operation: 2

@@ -2,6 +2,12 @@ require 'net/http'
 
 class Dispatcher
   
+  @@instance = Dispatcher.new
+  
+  def self.instance
+    @@instance
+  end
+  
   def add_candidates( envelope_id, candidates = [] )
     
     json_list = candidates.collect do |candidate|
@@ -62,7 +68,7 @@ class Dispatcher
     json =   "{"
     json <<    "\"email\" : \"#{recipient.contact.email}\"," 
     json <<    "\"name\" : \"#{recipient.contact.name}\","
-    json <<    "\"routingOrder\" : \"#{recipient.routing_order+1}\","
+    json <<    "\"routingOrder\" : \"#{recipient.flow_instance.routing_order+1}\","
     json <<    "\"recipientId\" : \"#{recipient.recipient_id}\","
     json <<    "\"customFields\" : [\"orig_id:#{recipient.recipient_id}\"]"
     json <<  "}"

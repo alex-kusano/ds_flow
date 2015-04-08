@@ -22,7 +22,7 @@ class EnvelopeInformation
     @envelope_params[param_name] 
   end
   
-  def get_recipients( criteria = {} )     
+  def get_recipients( criteria = {} ) 
     @recipients.select do |recipient|
       recipient.match( criteria )
     end

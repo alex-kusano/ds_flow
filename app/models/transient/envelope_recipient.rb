@@ -1,5 +1,5 @@
 class EnvelopeRecipient
-  attr_reader :contact, :type, :recipient_id, :status, :routing_order, :sign_date, :params
+  attr_reader :contact, :type, :recipient_id, :status, :routing_order, :sign_date, :params, :tabs
   
   def initialize( recipient_information = {} )    
     
@@ -15,6 +15,12 @@ class EnvelopeRecipient
       @params      = {}
     else
       @params      = parse_params( recipient_information[:CustomFields][:CustomField] )
+    end
+    
+    if recipient_information[:TabStatuses].nil? 
+      @tabs = {}
+    else
+      @tabs = parse_tabs( recipient_information[:TabStatuses][:TabStatus] )
     end
   end
   
@@ -37,8 +43,29 @@ class EnvelopeRecipient
     params
   end
   
+  def parse_tabs( tab_list_data )    
+    
+    tabs = {}
+    
+    return tabs if tab_list_data.nil? 
+    
+    if tab_list_data.is_a?( Array )
+      tab_list_data.each do | tab_data |
+        tabs[tab_data[:TabLabel]] = tab_data[:TabValue]
+      end
+    else
+      tabs[tab_list_data[:TabLabel]] = tab_list_data[:TabValue]
+    end 
+    
+    tabs
+  end
+  
   def get_param( param_name )
     @params[param_name]
+  end
+  
+  def get_tab( tab_label )
+    @tabs[tab_label]
   end
   
   def name
@@ -68,5 +95,5 @@ class EnvelopeRecipient
     return nil if date_info.blank?
     DateTime.parse(date_info)
   end
-  
+   
 end
