@@ -19,7 +19,8 @@ Rails.application.routes.draw do
   
   get  'accounts'           =>    'ds_accounts#index'
   post 'accounts'           =>    'ds_accounts#create'
-  get  'accounts/register'  =>    'ds_accounts#register'
+  delete 'accounts'         =>    'ds_accounts#destroy'
+  get  'accounts/new'       =>    'ds_accounts#new'
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

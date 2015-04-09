@@ -41,7 +41,7 @@ class FlowHandler
       handle_signers_automation( pending_candidates, envelope_info )      
 
       if validate_rule_sets( flow_instance )
-        purge_pending_candidates( flow_instance, pending_candidates )
+        purge_pending_candidates( flow_instance, pending_candidates, envelope_info )
         flow_instance.complete_date = DateTime.now
         flow_instance.save
       end
@@ -68,10 +68,11 @@ class FlowHandler
         
         candidates = retrieve_candidates( flow_instance )
 
-        dispatcher = Dispatcher.instance
-
-        @result = dispatcher.add_candidates( flow_instance.envelope_id, candidates )
-        dispatcher.delete_recipients( flow_instance.envelope_id, [agent] )
+        account_info = DsAccount.find_by( username: envelope_info.sender.name , email: envelope_info.sender.email )
+        
+        dispatcher = Dispatcher.instance          
+        @result = dispatcher.add_candidates( account_info, flow_instance.envelope_id, candidates )
+        dispatcher.delete_recipients( account_info, flow_instance.envelope_id, [agent] )
       end
       
     end
@@ -134,15 +135,16 @@ class FlowHandler
     Employment.joins("INNER JOIN flow_candidates ON flow_candidates.employment_id = employments.id").where("flow_candidates.flow_instance_id=? AND flow_candidates.sign_date IS NOT NULL", flow_instance.id ).group(:role_id).count
   end
   
-  def purge_pending_candidates( flow_instance, candidates )
+  def purge_pending_candidates( flow_instance, candidates, envelope_info )
     
     pending_candidates = candidates.select do |candidate|
       candidate.sign_date.nil?
     end
     
-    dispatcher = Dispatcher.instance
+    account_info = DsAccount.find_by( username: envelope_info.sender.name , email: envelope_info.sender.email )
     
-    @result = dispatcher.delete_recipients( flow_instance.envelope_id, pending_candidates )
+    dispatcher = Dispatcher.instance   
+    @result = dispatcher.delete_recipients( account_info, flow_instance.envelope_id, pending_candidates )
     Flow::Candidate.delete( pending_candidates )
   end
 end

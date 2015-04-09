@@ -1,3 +1,2 @@
-class DsAccount < ActiveRecord::Base
-  
+class DsAccount < ActiveRecord::Base  
 end

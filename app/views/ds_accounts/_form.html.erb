@@ -1,0 +1,17 @@
+<%= form_tag( accounts_path, method: "post") do %>
+  <p>
+    <strong><%= label_tag(:email, "Email:") %></strong>
+    <%= email_field_tag(:email) %>
+  </p>
+  <p>
+    <strong><%= label_tag(:password, "Senha:") %></strong>
+    <%= password_field_tag(:password) %>
+  </p>
+  <p>
+    <strong><%= label_tag(:key, "Chave de integração:") %></strong>
+    <%= text_field_tag(:key) %>
+  </p>
+  <p>
+    <%= submit_tag("Register") %>
+  </p>
+<% end %>

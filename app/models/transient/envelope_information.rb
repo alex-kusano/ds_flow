@@ -1,7 +1,7 @@
 require 'transient/envelope_recipient'
 
 class EnvelopeInformation
-  attr_reader :envelope_id, :envelope_status, :sender, :recipients
+  attr_reader :envelope_id, :envelope_status, :sender, :recipients, :envelope_params
   
   #
   def initialize( envelope_information = {} )

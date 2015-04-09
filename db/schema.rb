@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150408124007) do
+ActiveRecord::Schema.define(version: 20150409033151) do
 
   create_table "categories", force: true do |t|
     t.integer  "company_id"
@@ -30,6 +30,15 @@ ActiveRecord::Schema.define(version: 20150408124007) do
 
   create_table "companies", force: true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "connect_configs", force: true do |t|
+    t.integer  "send_interface_id"
+    t.integer  "sign_interface_id"
+    t.integer  "account_id"
+    t.integer  "true"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -58,6 +67,9 @@ ActiveRecord::Schema.define(version: 20150408124007) do
     t.string   "token"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "external_id"
+    t.string   "base_url"
+    t.string   "user_id"
   end
 
   create_table "employments", force: true do |t|
