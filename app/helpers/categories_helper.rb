@@ -17,9 +17,9 @@ module CategoriesHelper
   end
   
   def get_datatypes
-    [["STRING",  0],
-     ["INTEGER", 1],
-     ["FLOAT",   2]]
+    [["STRING",  Category.STRING],
+     ["INTEGER", Category.INTEGER],
+     ["FLOAT",   Category.FLOAT]]
   end
   
   def get_selected_datatype( category )

@@ -10,7 +10,7 @@ class CategoryMatcher
     unless company.nil? || company.categories.nil?
       company.categories.each do |category|
         code = extract_code( category, tabs )
-        return code unless code.nil?       
+        return code unless code.blank?       
       end
     end
     return nil
@@ -21,7 +21,7 @@ class CategoryMatcher
       unless category.subcategories.nil?
         category.subcategories.each do |subcategory|
           code = extract_code( subcategory, tabs )
-          return code unless code.nil?
+          return code unless code.blank?
         end
       end
       return category.code    
@@ -33,7 +33,9 @@ class CategoryMatcher
     
     cur_value = tabs[category.tab_name]
     
-    return false if cur_value.nil?
+    if cur_value.nil?
+      return category.datatype == Category.NIL
+    end
     
     case category.datatype
     when Category.INTEGER
@@ -61,6 +63,8 @@ class CategoryMatcher
       return tab_value > exp_value
     when Category.GREATER_THAN_OR_EQUAL
       return tab_value >= exp_value
+    when Category.NOT_EQUAL
+      return tab_value != exp_value
     end
   end
   

@@ -4,11 +4,13 @@ class Category < ActiveRecord::Base
   LESS_THAN_OR_EQUAL     = 2
   GREATER_THAN           = 3
   GREATER_THAN_OR_EQUAL  = 4
+  NOT_EQUAL              = 5
   
   STRING                 = 0
   INTEGER                = 1
   FLOAT                  = 2
   DATE                   = 3
+  NIL                    = 4
   
   belongs_to   :company
   has_many     :subcategories,     class_name: "Category",  foreign_key: "parent_id"
@@ -30,13 +32,15 @@ class Category < ActiveRecord::Base
         ">"
       when GREATER_THAN_OR_EQUAL
         ">="
+      when NOT_EQUAL
+        "<>"
       else
       "Unknown operation"
     end
   end
   
   def datatype_string
-    case operation
+    case datatype
       when STRING
         "STRING"
       when INTEGER
@@ -45,6 +49,8 @@ class Category < ActiveRecord::Base
         "FLOAT"
       when DATE
         "DATE"
+      when NIL
+        "NIL"
       else
         "Unknown Datatype"
     end
@@ -70,6 +76,10 @@ class Category < ActiveRecord::Base
     GREATER_THAN_OR_EQUAL
   end
   
+  def self.NOT_EQUAL
+    NOT_EQUAL
+  end
+  
   def self.STRING
     STRING
   end
@@ -86,6 +96,9 @@ class Category < ActiveRecord::Base
     DATE
   end
   
+  def self.NIL
+    NIL
+  end
 end
 
   
