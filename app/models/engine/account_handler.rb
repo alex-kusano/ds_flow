@@ -59,12 +59,12 @@ class AccountHandler
       
       csend_response = Dispatcher.instance.create_connect_config( account, 
                                                                   "Bomberinho_Send", 
-                                                                  "http://ebad893c.proxy.webhookapp.com/api/connect/sent",
+                                                                  "https://dsflow.herokuapp.com/api/connect/sent",
                                                                   ["Sent"] )
       
       csign_response = Dispatcher.instance.create_connect_config( account, 
                                                                   "Bomberinho_Sign", 
-                                                                  "http://ebad893c.proxy.webhookapp.com/api/connect/signed",
+                                                                  "https://dsflow.herokuapp.com//api/connect/signed",
                                                                   ["Completed"] )
       
       unless ( csend_response.nil? || csign_response.nil? )
