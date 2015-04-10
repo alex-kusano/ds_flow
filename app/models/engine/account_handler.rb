@@ -58,12 +58,12 @@ class AccountHandler
     if( config.nil? )
       
       csend_response = Dispatcher.instance.create_connect_config( account, 
-                                                                  "Bomberinho_Send", 
+                                                                  "Campari_Send", 
                                                                   "https://dsflow.herokuapp.com/api/connect/sent",
                                                                   ["Sent"] )
       
       csign_response = Dispatcher.instance.create_connect_config( account, 
-                                                                  "Bomberinho_Sign", 
+                                                                  "Campari_Sign", 
                                                                   "https://dsflow.herokuapp.com//api/connect/signed",
                                                                   ["Completed"] )
       
