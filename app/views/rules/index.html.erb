@@ -1,9 +1,9 @@
-<h1>Listing rules</h1>
+<h1>Regras</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Rule</th>
+      <th>Regra</th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -12,13 +12,17 @@
     <% @rules.each do |rule| %>
       <tr>
         <td><%= rule.to_s %></td>
-        <td><%= link_to 'Show', rule %></td>
-        <td><%= link_to 'Destroy', rule, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Detalhes', rule %></td>
+        <td><%= link_to 'Excluir', rule, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="3" class="text-center"><%= link_to 'New Rule', new_rule_path %></td>
+    </tr>
+  </tfoot>
 </table>
 
 <br>
 
-<%= link_to 'New Rule', new_rule_path %>

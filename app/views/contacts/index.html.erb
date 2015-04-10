@@ -1,9 +1,10 @@
-<h1>Listing contacts</h1>
+<h1>Signat&aacute;rios</h1>
+<p id="notice"><%= notice %></p>
 
-<table>
+<table class="table">
   <thead>
     <tr>
-      <th>Name</th>
+      <th>Nome</th>
       <th>Email</th>
       <th colspan="3"></th>
     </tr>
@@ -14,14 +15,19 @@
       <tr>
         <td><%= contact.name %></td>
         <td><%= contact.email %></td>
-        <td><%= link_to 'Show', contact %></td>
-        <td><%= link_to 'Edit', edit_contact_path(contact) %></td>
-        <td><%= link_to 'Destroy', contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Detalhes', contact %></td>
+        <td><%= link_to 'Atualizar', edit_contact_path(contact) %></td>
+        <td><%= link_to 'Excluir', contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="5" class="text-center"><%= link_to 'Novo Signatário', new_contact_path %></td>
+    </tr>
+  </tfoot>
 </table>
 
 <br>
 
-<%= link_to 'New Contact', new_contact_path %>
+

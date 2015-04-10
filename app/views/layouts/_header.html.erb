@@ -3,41 +3,65 @@
     <%= link_to "DS Flow", root_path, id: 'logo' %>
     <nav>
       <ul class='navbar navbar-nav navbar-right'>
-        <li><%= link_to "Home", root_path %></li> 
+        <li><%= link_to "Página Principal", root_path %></li>
         <li class="dropdown">
+          &nbsp;&nbsp;&nbsp;
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            Contacts <b class="caret"></b>
+            Signat&aacute;rios <b class="caret"></b>
           </a>
           <ul class="dropdown-menu">
-            <li><%= link_to "new", new_contact_path %></li>                        
-            <li><%= link_to "list", contacts_path %></li>
+            <li><%= link_to "Cadastrar", new_contact_path %></li>                        
+            <li><%= link_to "Lista", contacts_path %></li>
           </ul>
         </li>
         <li class="dropdown">
+          &nbsp;&nbsp;
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            Company <b class="caret"></b>
+            Cargos<b class="caret"></b>
           </a>
           <ul class="dropdown-menu">
-            <li><%= link_to "new", new_company_path %></li>                        
-            <li><%= link_to "list", companies_path %></li>
+            <li><%= link_to "Cadastrar", new_role_path %></li>                        
+            <li><%= link_to "Lista", roles_path %></li>
           </ul>
         </li>
         <li class="dropdown">
+          &nbsp;&nbsp;
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            RuleSet <b class="caret"></b>
+            Empresas <b class="caret"></b>
           </a>
           <ul class="dropdown-menu">
-            <li><%= link_to "new", new_rule_set_path %></li>                        
-            <li><%= link_to "list", rule_sets_path %></li>
+            <li><%= link_to "Cadastrar", new_company_path %></li>                        
+            <li><%= link_to "Lista", companies_path %></li>
           </ul>
         </li>
         <li class="dropdown">
+          &nbsp;&nbsp;
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            Categories <b class="caret"></b>
+            Classificadores <b class="caret"></b>
           </a>
           <ul class="dropdown-menu">
-            <li><%= link_to "new", new_category_path %></li>                        
-            <li><%= link_to "list", categories_path %></li>
+            <li><%= link_to "Cadastrar", new_category_path %></li>                        
+            <li><%= link_to "Lista", categories_path %></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          &nbsp;&nbsp;
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            Regras <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu">
+            <li><%= link_to "Cadastrar", new_rule_set_path %></li>                        
+            <li><%= link_to "Lista", rule_sets_path %></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          &nbsp;&nbsp;
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            Connect <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu">
+            <li><%= link_to "Cadastrar", accounts_new_path %></li>                        
+            <li><%= link_to "Lista", accounts_path %></li>
           </ul>
         </li>
       </ul>      

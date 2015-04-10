@@ -20,6 +20,8 @@ class FlowHandler
       merged_tabs.merge!(recipient.tabs)
     end
     
+    merged_tabs.merge!(envelope_info.envelope_params)
+    
     agents = envelope_info.get_recipients( type: 'Agent', status: ['Sent', 'Delivered'] )
 
     #Only one is actually expected

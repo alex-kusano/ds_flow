@@ -1,32 +1,36 @@
 <p id="notice"><%= notice %></p>
-
+<h3>Classe de Regras: <span class="small"><%= @rule_set.code %></span></h3>
+<hr>
 <p>
-  <strong>Code:</strong>
+  <strong>Classe:</strong>
   <%= @rule_set.code %>
 </p>
 
-<table>
-  <thead>
-    <tr>
-      <th>Rule</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @rule_set.rules.each do |rule| %>
-    <tr>
-      <td><%= rule %></td>
-      <td><%= link_to 'Edit', rule_path( build_rule_set_params rule ) %></td>
-      <td><%= link_to 'Destroy', rule, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    </tr>
-    <% end %>
-  </tbody>
-  <tfoot>
-    <tr>
-      <td colspan="3"><%= link_to 'Add Rule', new_rule_path( build_rule_set_params ) %></td>      
-    </tr>
-  </tfoot>
-</table>
+<p>
+  <strong>Regras:</strong>   
+  <table class="table">    
+    <thead>
+      <tr>
+        <th>Regra</th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @rule_set.rules.each do |rule| %>
+      <tr>
+        <td><%= rule %></td>
+        <td><%= link_to 'Edit', rule_path( build_rule_set_params rule ) %></td>
+        <td><%= link_to 'Destroy', rule, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+      <% end %>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="3" class="text-center"><%= link_to 'Nova Regra', new_rule_path( build_rule_set_params ) %></td>      
+      </tr>
+    </tfoot>
+  </table>
+</p>
 
-<%= link_to 'Edit', edit_rule_set_path(@rule_set) %> |
-<%= link_to 'Back', rule_sets_path %>
+<%= link_to 'Atualizar', edit_rule_set_path(@rule_set) %> |
+<%= link_to 'Voltar', rule_sets_path %>

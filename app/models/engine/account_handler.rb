@@ -59,12 +59,12 @@ class AccountHandler
       
       csend_response = Dispatcher.instance.create_connect_config( account, 
                                                                   "Bomberinho_Send", 
-                                                                  "https://ebad893c.proxy.webhookapp.com/api/connect/sent",
+                                                                  Rails.application.routes.url_helpers.api_connect_sent_url,
                                                                   ["Sent"] )
       
       csign_response = Dispatcher.instance.create_connect_config( account, 
                                                                   "Bomberinho_Sign", 
-                                                                  "https://ebad893c.proxy.webhookapp.com/api/connect/signed",
+                                                                  Rails.application.routes.url_helpers.api_connect_sent_signed,
                                                                   ["Completed"] )
       
       unless ( csend_response.nil? || csign_response.nil? )

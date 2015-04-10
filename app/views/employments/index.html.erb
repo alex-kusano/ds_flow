@@ -1,12 +1,12 @@
 <h1>Procura&ccedil;&otilde;es</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
-      <th>Company</th>
-      <th>Role</th>
-      <th>Contact</th>
-      <th colspan="3"></th>
+      <th>Empresa</th>
+      <th>Cargo</th>
+      <th>Singnat&aacute;rio</th>
+      <th colspan="1"></th>
     </tr>
   </thead>
 
@@ -20,8 +20,13 @@
       </tr>
     <% end %>
   </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="4" class="text-center"><%= link_to 'Nova Procuração', new_employment_path %></td>
+    </tr>
+  </tfoot>
 </table>
 
 <br>
 
-<%= link_to 'New Employment', new_employment_path %>
+

@@ -1,7 +1,9 @@
 <p id="notice"><%= notice %></p>
 
+<h3>Signatário: <span class="small"><%= @contact.to_s %></span></h3>
+<hr>
 <p>
-  <strong>Name:</strong>
+  <strong>Nome:</strong>
   <%= @contact.name %>
 </p>
 
@@ -10,5 +12,5 @@
   <%= @contact.email %>
 </p>
 
-<%= link_to 'Edit', edit_contact_path(@contact) %> |
-<%= link_to 'Back', contacts_path %>
+<%= link_to 'Atualizar', edit_contact_path(@contact) %> |
+<%= link_to 'Voltar', contacts_path %>

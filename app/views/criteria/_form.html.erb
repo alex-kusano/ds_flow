@@ -12,17 +12,17 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :rule %>
+    <%= f.label :rule, 'Regra' %>
     <%= f.collection_select :rule_id, get_rules, :id, :to_s, :selected => get_selected_rule(@criterium) %>
   </div>
 
   <div class="field">
-    <%= f.label :role %>
+    <%= f.label :role, 'Cargo' %>
       <%= f.collection_select :role_id, get_roles, :id, :to_s, :selected => get_selected_role(@criterium) %>
   </div>
 
   <div class="field">
-    <%= f.label :count %>
+    <%= f.label :count, 'Quantidade' %>
     <%= f.number_field :count %>
   </div>
 

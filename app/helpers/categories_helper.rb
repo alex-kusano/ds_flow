@@ -67,7 +67,7 @@ module CategoriesHelper
     built_params[:parent_id] = params[:id]
     unless subcategory.nil?
       built_params[:id] =  subcategory.id 
-    end
+    end    
     built_params
   end
 end

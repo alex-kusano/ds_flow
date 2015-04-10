@@ -1,27 +1,28 @@
-<h1>Listing criteria</h1>
+<h1>Crit&eacute;rios</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
-      <td>Role</td>
-      <td>Count</td>
+      <td>Regra</td>
+      <td>Quantidade</td>
       <th colspan="3"></th>
     </tr>
   </thead>
-
   <tbody>
     <% @criteria.each do |criterium| %>
       <tr>
         <td><%= criterium.role %></td>
         <td><%= criterium.count %></td>
-        <td><%= link_to 'Show', criterium %></td>
-        <td><%= link_to 'Edit', edit_criterium_path(criterium) %></td>
-        <td><%= link_to 'Destroy', criterium, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Detalhe', criterium %></td>
+        <td><%= link_to 'Atualizar', edit_criterium_path(criterium) %></td>
+        <td><%= link_to 'Excluir', criterium, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="5" class="text-center"><%= link_to 'Novo Critério', new_criterium_path %></td>
+    </tr>
+  </tfoot>
 </table>
 
-<br>
-
-<%= link_to 'New Criterium', new_criterium_path %>

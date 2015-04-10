@@ -7,7 +7,7 @@
   color: #fff;
   text-transform: uppercase;
   letter-spacing: -1px;
-  padding-top: 15px;
+  padding-top: 10px;
   font-weight: bold;
 }
 
@@ -18,5 +18,11 @@
 
 /* Universal */
 body {
-  padding-top: 60px;
+  padding-top: 65px;
+}
+
+/* Header */
+header nav {
+  height: 60px;
+  padding-top: 15px;
 }

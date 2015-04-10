@@ -1,6 +1,6 @@
-<h1>Listing roles</h1>
+<h1>Cargos</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Name</th>
@@ -18,8 +18,13 @@
       </tr>
     <% end %>
   </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="4" class="text-center"><%= link_to 'Novo Cargo', new_role_path %></td>
+    </tr>
+  </tfoot>
 </table>
 
 <br>
 
-<%= link_to 'New Role', new_role_path %>
+

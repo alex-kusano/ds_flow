@@ -1,26 +1,30 @@
 <p id="notice"><%= notice %></p>
+<h3>Regra: <span class="small"><%= @rule.to_s %></span></h3>
+<hr>
+<p>
+  <strong>Crit&eacute;rios:</strong>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Crit&eacute;rio</th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @rule.criteria.each do |criterium| %>
+      <tr>
+        <td><%= criterium %></td>
+        <td><%= link_to 'Atualizar', edit_criterium_path( build_rule_params criterium ) %></td>
+        <td><%= link_to 'Excluir', criterium_url( build_rule_params criterium ), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+      <% end %>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="3" class="text-center"><%= link_to 'Novo Critério', new_criterium_path( build_rule_params ) %></td>      
+      </tr>
+    </tfoot>
+  </table>
+</p>
 
-<table>
-  <thead>
-    <tr>
-      <th>Rule</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @rule.criteria.each do |criterium| %>
-    <tr>
-      <td><%= criterium %></td>
-      <td><%= link_to 'Edit', edit_criterium_path( build_rule_params criterium ) %></td>
-      <td><%= link_to 'Destroy', criterium_url( build_rule_params criterium ), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    </tr>
-    <% end %>
-  </tbody>
-  <tfoot>
-    <tr>
-      <td colspan="3"><%= link_to 'Add Criterium', new_criterium_path( build_rule_params ) %></td>      
-    </tr>
-  </tfoot>
-</table>
-
-<%= link_to 'Back', get_back_path %>
+<%= link_to 'Voltar', get_back_path %>

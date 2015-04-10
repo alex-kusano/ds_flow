@@ -11,7 +11,11 @@ class RuleSet < ActiveRecord::Base
   end
   
   def to_s
-    "#{code}"
+    if( rules.blank? )
+      "No Rule!"
+    else
+      "(#{rules.to_a.join(') OR (')})"
+    end
   end
   
   #####################################################################

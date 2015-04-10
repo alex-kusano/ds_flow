@@ -15,7 +15,7 @@ class Category < ActiveRecord::Base
   belongs_to   :parent,            class_name: "Category"
   
   def to_s
-    "#{tab_name} #{operation_string} #{tab_value} => #{code}"
+    "#{tab_name} #{operation_string} #{tab_value}"
   end
     
   def operation_string

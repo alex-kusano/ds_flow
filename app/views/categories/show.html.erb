@@ -1,71 +1,82 @@
 <p id="notice"><%= notice %></p>
 
+<h3>Classificador: <span class="small"><%= @category.to_s %></span></h3>
+<hr>
 <p>
-  <strong>Company:</strong>
-  <%= @category.company %>
-</p>
-<p>
-  <strong>Tab name:</strong>
-  <%= @category.tab_name %>
+  <strong>Empresa:</strong></span>
+<%= link_to @category.company, @category.company %>
 </p>
 
 <p>
-  <strong>Value:</strong>
-  <%= @category.tab_value %>
-</p>
-
-<p>
-  <strong>Datatype:</strong>
+  <strong>Tipo de Classificador:</strong>
   <%= @category.datatype_string %>
 </p>
 
 <p>
-  <strong>Operation:</strong>
+  <strong>Classificador:</strong>
+  <%= @category.tab_name %>
+</p>
+
+<p>
+  <strong>Opera&ccedil;&atilde;o:</strong>
   <%= @category.operation_string %>
 </p>
 
 <p>
-  <strong>Code:</strong>
+  <strong>Par&acirc;metro:</strong>
+  <%= @category.tab_value %>
+</p>
+
+<% unless @category.code.blank? %>
+<p>
+  <strong>Classe:</strong>
   <%= @category.code %>
 </p>
+<% end %>
 
+<% unless @category.parent.nil? %>
 <p>
-  <strong>Parent:</strong>
+  <strong>Supercategoria:</strong>
   <%= @category.parent %>
 </p>
+<% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Company</th>
-      <th>Tab name</th>
-      <th>Value</th>
-      <th>Datatype</th>
-      <th>Operation</th>
-      <th>Code</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @category.subcategories.each do |subcategory| %>
-    <tr>
-      <td><%= subcategory.company %></td>
-      <td><%= subcategory.tab_name %></td>
-      <td><%= subcategory.tab_value %></td>
-      <td><%= subcategory.datatype_string %></td>
-      <td><%= subcategory.operation_string %></td>
-      <td><%= subcategory.code %></td>
-      <td><%= link_to 'Edit', edit_category_path( build_category_params subcategory ) %></td>
-      <td><%= link_to 'Destroy', subcategory, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    </tr>
-    <% end %>
-  </tbody>
-  <tfoot>
-    <tr>
-      <td colspan="3"><%= link_to 'Add Subcategory', new_category_path( build_category_params ) %></td>      
-    </tr>
-  </tfoot>
-</table>  
+<p>
+  <strong>Subcategoriza&ccedil;&atilde;o:</strong>
 
-<%= link_to 'Edit', edit_category_path(@category) %> |
-<%= link_to 'Back', categories_path %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Tipo de Classificador</th>
+        <th>Classificador</th>
+        <th>Opera&ccedil;&atilde;o</th>
+        <th>Par&acirc;metro</th>
+        <th>Classe</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @category.subcategories.each do |subcategory| %>
+      <tr>
+        <td><%= subcategory.datatype_string %></td>
+        <td><%= subcategory.tab_name %></td>
+        <td><%= subcategory.operation_string %></td>
+        <td><%= subcategory.tab_value %></td>
+        <td><%= subcategory.code %></td>
+        <td><%= link_to 'Detalhes', category_path( build_category_params subcategory ) %></td>
+        <td><%= link_to 'Atualizar', edit_category_path( build_category_params subcategory ) %></td>
+        <td><%= link_to 'Excluir', subcategory, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+      <% end %>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="8" class="text-center"><%= link_to 'Nova subcategoria', new_category_path( build_category_params().merge({ company_id: @category.company }) ) %></td>      
+      </tr>
+    </tfoot>
+  </table>  
+</p>
+
+
+<%= link_to 'Atualizar', edit_category_path(@category) %> |
+<%= link_to 'Voltar', @category.parent.nil? ? categories_path : @category.parent  %>

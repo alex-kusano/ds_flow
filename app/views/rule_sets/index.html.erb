@@ -1,9 +1,10 @@
-<h1>Listing rule_sets</h1>
+<h1>Classes</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
-      <th>Code</th>
+      <th>Classe</th>
+      <th>Regra</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -12,14 +13,20 @@
     <% @rule_sets.each do |rule_set| %>
       <tr>
         <td><%= rule_set.code %></td>
-        <td><%= link_to 'Show', rule_set %></td>
-        <td><%= link_to 'Edit', edit_rule_set_path(rule_set) %></td>
-        <td><%= link_to 'Destroy', rule_set, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= rule_set.to_s %></td>
+        <td><%= link_to 'Detalhes', rule_set %></td>
+        <td><%= link_to 'Atualizar', edit_rule_set_path(rule_set) %></td>
+        <td><%= link_to 'Excluir', rule_set, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="5", class="text-center"><%= link_to 'Nova Classe de Regras', new_rule_set_path %></td>
+    </tr>
+  </tfoot>
 </table>
 
 <br>
 
-<%= link_to 'New Rule set', new_rule_set_path %>
+

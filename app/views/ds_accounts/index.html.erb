@@ -1,11 +1,11 @@
-<h1>Listing accounts</h1>
+<h1>Contas Docusign</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
-      <th>User Name</th>
+      <th>Usu&aacute;rio</th>
       <th>Email</th>
-      <th>Account Id</th>
+      <th>Id da Conta</th>
       <th></th>
     </tr>
   </thead>
@@ -20,6 +20,11 @@
       </tr>
     <% end %>
   </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="4", class="text-center"><%= link_to 'Nova Conta', accounts_new_path %></td>
+    </tr>
+  </tfoot>
 </table>
 
 <br>
