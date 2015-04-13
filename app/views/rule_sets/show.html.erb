@@ -16,7 +16,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @rule_set.rules.each do |rule| %>
+      <% @rules.each do |rule| %>
       <tr>
         <td><%= rule %></td>
         <td><%= link_to 'Edit', rule_path( build_rule_set_params rule ) %></td>
@@ -30,6 +30,11 @@
       </tr>
     </tfoot>
   </table>
+
+  <div class="text-right">
+    <%= paginate @rules %>
+    <%= page_entries_info @rules %>
+  </div>
 </p>
 
 <%= link_to 'Atualizar', edit_rule_set_path(@rule_set) %> |

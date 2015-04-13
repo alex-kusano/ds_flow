@@ -1,15 +1,18 @@
 class ContactsController < ApplicationController
   before_action :set_contact, only: [:show, :edit, :update, :destroy]
+  
+  has_scope :named
 
   # GET /contacts
   # GET /contacts.json
   def index
-    @contacts = Contact.all
+    @contacts = apply_scopes(Contact).page(params[:page]).per(10)
   end
 
   # GET /contacts/1
   # GET /contacts/1.json
   def show
+    @employments = @contact.employments.page(params[:page]).per(5)
   end
 
   # GET /contacts/new

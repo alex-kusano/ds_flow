@@ -10,6 +10,7 @@
 </p>
 
 <h4>Procura&ccedil;&otilde;es:</h4>
+
 <table class="table">
   <thead>
     <tr>
@@ -18,8 +19,8 @@
       <th></th>
     </tr>
   </thead>
-  <tbody>
-    <% @company.employments.each do |employment| %>
+  <tbody>   
+    <% @employments.each do |employment| %>
     <tr>
       <td><%= employment.role %></td>
       <td><%= employment.contact %></td>
@@ -29,10 +30,14 @@
   </tbody>
   <tfoot>
     <tr>
-      <td colspan="3", class="text-center"><%= link_to 'Nova Procuração', new_employment_path( build_company_params @company ) %></td>      
+      <td colspan="3", class="text-center"><%= link_to 'Nova Procuração', new_employment_path( build_company_params ) %></td>      
     </tr>
   </tfoot>
 </table>
+<div class="text-right">
+  <%= paginate @employments %>
+  <%= page_entries_info @employments %>
+</div>
 <br>
 
 <%= link_to 'Atualizar', edit_company_path(@company) %> |

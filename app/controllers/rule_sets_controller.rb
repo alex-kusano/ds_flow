@@ -1,15 +1,18 @@
 class RuleSetsController < ApplicationController
   before_action :set_rule_set, only: [:show, :edit, :update, :destroy]
 
+  has_scope :by_code
+  
   # GET /rule_sets
   # GET /rule_sets.json
   def index
-    @rule_sets = RuleSet.all.order(:code)
+    @rule_sets = apply_scopes(RuleSet).order(:code).page( params[:page] )
   end
 
   # GET /rule_sets/1
   # GET /rule_sets/1.json
   def show
+    @rules = @rule_set.rules.page(params[:page])
   end
 
   # GET /rule_sets/new

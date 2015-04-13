@@ -4,7 +4,7 @@ class CriteriaController < ApplicationController
   # GET /criteria
   # GET /criteria.json
   def index
-    @criteria = Criterium.all
+    @criteria = Criterium.page(params[:page]).per(10)
   end
 
   # GET /criteria/1

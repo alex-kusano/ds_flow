@@ -34,6 +34,12 @@ gem 'actionpack-xml_parser'
 # UUID tools for GUID generation
 gem 'uuidtools'
 
+# Pagination tool
+gem 'kaminari',     '0.16.3'
+
+# Filtering tool
+gem 'has_scope',     '0.6.0'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

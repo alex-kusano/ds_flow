@@ -11,6 +11,37 @@
   <strong>Email:</strong>
   <%= @contact.email %>
 </p>
+<hr>
+<h4>Procura&ccedil;&otilde;es:</h4>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Cargo</th>
+      <th>Signat&aacute;rio</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>   
+    <% @employments.each do |employment| %>
+    <tr>
+      <td><%= employment.role %></td>
+      <td><%= employment.contact %></td>
+      <td><%= link_to 'Excluir', employment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="3", class="text-center"><%= link_to 'Nova Procuração', new_employment_path( build_contact_params ) %></td>      
+    </tr>
+  </tfoot>
+</table>
+<div class="text-right">
+  <%= paginate @employments %>
+  <%= page_entries_info @employments %>
+</div>
+
+<br>
 
 <%= link_to 'Atualizar', edit_contact_path(@contact) %> |
 <%= link_to 'Voltar', contacts_path %>

@@ -16,6 +16,8 @@ class Category < ActiveRecord::Base
   has_many     :subcategories,     class_name: "Category",  foreign_key: "parent_id"
   belongs_to   :parent,            class_name: "Category"
   
+  scope        :root_categories,  -> { where( parent_id: nil ) }
+  
   def to_s
     "#{tab_name} #{operation_string} #{tab_value}"
   end

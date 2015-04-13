@@ -11,7 +11,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @rule.criteria.each do |criterium| %>
+      <% @criteria.each do |criterium| %>
       <tr>
         <td><%= criterium %></td>
         <td><%= link_to 'Atualizar', edit_criterium_path( build_rule_params criterium ) %></td>
@@ -25,6 +25,10 @@
       </tr>
     </tfoot>
   </table>
+  <div class="text-right">
+    <%= paginate @criteria %>
+    <%= page_entries_info @criteria %>
+  </div>     
 </p>
 
 <%= link_to 'Voltar', get_back_path %>

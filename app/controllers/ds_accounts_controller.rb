@@ -30,6 +30,6 @@ class DsAccountsController < ApplicationController
   end
   
   def index
-    @accounts = DsAccount.all
+    @accounts = DsAccount.page(params[:page]).per(10)
   end
 end

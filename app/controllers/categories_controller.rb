@@ -4,12 +4,13 @@ class CategoriesController < ApplicationController
   # GET /categories
   # GET /categories.json
   def index
-    @categories = Category.where( parent_id: nil )
+    @categories = Category.root_categories.page( params[:page] ).per(10)
   end
 
   # GET /categories/1
   # GET /categories/1.json
   def show
+    @subcategories = @category.subcategories.page( params[:page] ).per(5)
   end
 
   # GET /categories/new

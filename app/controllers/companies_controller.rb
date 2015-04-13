@@ -4,12 +4,13 @@ class CompaniesController < ApplicationController
   # GET /companies
   # GET /companies.json
   def index
-    @companies = Company.all
+    @companies = Company.page(params[:page]).per(10)
   end
 
   # GET /companies/1
   # GET /companies/1.json
   def show
+    @employments = @company.employments.page(params[:page]).per(5)
   end
 
   # GET /companies/new

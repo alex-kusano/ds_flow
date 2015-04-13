@@ -45,8 +45,10 @@ module EmploymentsHelper
   end
   
   def get_back_path
-    unless params[:company_id].nil? 
+    if not params[:company_id].blank? 
       return company_path( id: params[:company_id] )
+    elsif not params[:contact_id].blank?
+      return contact_path( id: params[:contact_id] )
     end
     employments_path
   end

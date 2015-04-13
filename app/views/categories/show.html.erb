@@ -56,7 +56,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @category.subcategories.each do |subcategory| %>
+      <% @subcategories.each do |subcategory| %>
       <tr>
         <td><%= subcategory.datatype_string %></td>
         <td><%= subcategory.tab_name %></td>
@@ -74,7 +74,11 @@
         <td colspan="8" class="text-center"><%= link_to 'Nova subcategoria', new_category_path( build_category_params().merge({ company_id: @category.company }) ) %></td>      
       </tr>
     </tfoot>
-  </table>  
+  </table>
+  <div class="text-right">
+    <%= paginate @subcategories %>
+    <%= page_entries_info @subcategories %>
+  </div>
 </p>
 
 

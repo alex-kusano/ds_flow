@@ -4,12 +4,13 @@ class RulesController < ApplicationController
   # GET /rules
   # GET /rules.json
   def index
-    @rules = Rule.all
+    @rules = Rule.page(params[:page])
   end
 
   # GET /rules/1
   # GET /rules/1.json
   def show
+    @criteria = @rule.criteria.page(params[:page]).per(2)
   end
 
   # GET /rules/new
