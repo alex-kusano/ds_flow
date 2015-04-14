@@ -34,7 +34,7 @@ class AccountHandler
   
   def register( login_info ) 
     
-    account = DsAccount.find_by( username: login_info[:user_name], email: login_info[:email] )
+    account = DsAccount.find_by( external_id: login_info[:account_id] )
     
     return nil unless account.nil? 
     
@@ -51,20 +51,19 @@ class AccountHandler
     return account   
   end
   
-  def update_connect_config( account )
+  def update_connect_config( account, event_handler_path = "https://dsflow.herokuapp.com/api/connect" )
     
     config = ConnectConfig.find_by( account_id: account.external_id )
     
-    if( config.nil? )
-      
+    if config.nil?       
       csend_response = Dispatcher.instance.create_connect_config( account, 
                                                                   "Campari_Send", 
-                                                                  "https://ebad893c.proxy.webhookapp.com/api/connect/sent",
+                                                                  "#{event_handler_path}/sent",
                                                                   ["Sent"] )
       
       csign_response = Dispatcher.instance.create_connect_config( account, 
                                                                   "Campari_Sign", 
-                                                                  "https://ebad893c.proxy.webhookapp.com/api/connect/signed",
+                                                                  "#{event_handler_path}/signed",
                                                                   ["Completed"] )
       
       unless ( csend_response.nil? || csign_response.nil? )
@@ -73,17 +72,23 @@ class AccountHandler
                                     sign_interface_id: csign_response['connectId'] )
         
         config.save
-      end
-    else
-      user_ids = config.accounts.collect do |account|
-        account.user_id
-      end
-      
-      Dispatcher.instance.update_connect_users( config.send_interface_id, user_ids )
-      Dispatcher.instance.update_connect_users( config.sign_interface_id, user_ids )
+      end   
     end
     
     config
+  end
+  
+  def disconnect( ds_account ) 
+    
+    config = ConnectConfig.find_by( account_id: ds_account.external_id )
+    
+    unless config.nil?
+      Dispatcher.instance.delete_connect_config( ds_account, config.send_interface_id )  
+      Dispatcher.instance.delete_connect_config( ds_account, config.sign_interface_id )
+      config.destroy
+    end
+    
+    Dispatcher.instance.delete_token( ds_account )    
   end
   
 end

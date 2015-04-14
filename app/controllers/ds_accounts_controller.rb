@@ -2,8 +2,7 @@ require 'engine/account_handler'
 
 class DsAccountsController < ApplicationController
   
-  def new 
-    
+  def new     
   end
   
   def create
@@ -20,13 +19,23 @@ class DsAccountsController < ApplicationController
       redirect_to accounts_path notice: 'User is already registered!'
     end
     
-    handler.update_connect_config( ds_account )
+    handler.update_connect_config( ds_account, api_connect_url )
     
     redirect_to accounts_path, notice: 'User registered successfully.'
   end
   
   def destroy
+    ds_account = DsAccount.find(params[:id])
     
+    handler = AccountHandler.instance
+    
+    if handler.disconnect( ds_account )
+      ds_account.destroy
+      redirect_to accounts_url, notice: 'Account link successfully destroyed' 
+      
+    else
+      redirect_to accounts_url, notice: 'Account link destruction failed'      
+    end
   end
   
   def index

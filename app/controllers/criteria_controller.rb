@@ -62,9 +62,9 @@ class CriteriaController < ApplicationController
     respond_to do |format|
       format.html { 
         if params[:rule_id].nil? 
-          redirect_to criteria_url, notice: 'Criterium was successfully destroyed.', rule_id: params[:rule_id], rule_set_id: params[:rule_set_id] 
+          redirect_to criteria_url( rule_set_id: params[:rule_set_id] ), notice: 'Criterium was successfully destroyed.'
         else
-          redirect_to rule_url( notice: 'Criterium was successfully destroyed.', id: params[:rule_id], rule_set_id: params[:rule_set_id] )
+          redirect_to rule_url( id: params[:rule_id], rule_set_id: params[:rule_set_id] ), notice: 'Criterium was successfully destroyed.'
         end
         
       }

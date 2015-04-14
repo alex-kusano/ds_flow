@@ -70,11 +70,14 @@ class FlowHandler
         
         candidates = retrieve_candidates( flow_instance )
 
-        account_info = DsAccount.find_by( username: envelope_info.sender.name , email: envelope_info.sender.email )
+        account_id = envelope_info.get_envelope_param( "AccountId" ).to_i
+        sender = envelope_info.sender.email
+        
+        account_info = DsAccount.find_by( external_id: account_id )
         
         dispatcher = Dispatcher.instance          
-        @result = dispatcher.add_candidates( account_info, flow_instance.envelope_id, candidates )
-        dispatcher.delete_recipients( account_info, flow_instance.envelope_id, [agent] )
+        @result = dispatcher.add_candidates( account_info, flow_instance.envelope_id, candidates, sender )
+        dispatcher.delete_recipients( account_info, flow_instance.envelope_id, [agent], sender )
       end
       
     end
@@ -143,10 +146,13 @@ class FlowHandler
       candidate.sign_date.nil?
     end
     
-    account_info = DsAccount.find_by( username: envelope_info.sender.name , email: envelope_info.sender.email )
+    account_id = envelope_info.get_envelope_param( "AccountId" ).to_i
+    sender = envelope_info.sender.email
+
+    account_info = DsAccount.find_by( external_id: account_id )    
     
     dispatcher = Dispatcher.instance   
-    @result = dispatcher.delete_recipients( account_info, flow_instance.envelope_id, pending_candidates )
+    @result = dispatcher.delete_recipients( account_info, flow_instance.envelope_id, pending_candidates, sender )
     Flow::Candidate.delete( pending_candidates )
   end
 end

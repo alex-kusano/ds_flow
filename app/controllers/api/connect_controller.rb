@@ -3,6 +3,10 @@ require 'engine/flow_handler'
 
 class Api::ConnectController < ApplicationController
   
+  def index
+    redirect_to root_path
+  end
+  
   def sent
     envelope_info = EnvelopeInformation.new ( params[:DocuSignEnvelopeInformation] )
     

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   root    'static_pages#home'
   
   namespace :api do
+    get   'connect'         =>    'connect#index'
     post  'connect/sent'    =>    'connect#sent'
     post  'connect/signed'  =>    'connect#signed'
   end
@@ -17,10 +18,11 @@ Rails.application.routes.draw do
   resources :rules
   resources :criteria
   
-  get  'accounts'           =>    'ds_accounts#index'
-  post 'accounts'           =>    'ds_accounts#create'
-  delete 'accounts'         =>    'ds_accounts#destroy'
-  get  'accounts/new'       =>    'ds_accounts#new'
+  get    'accounts'         =>    'ds_accounts#index'
+  post   'accounts'         =>    'ds_accounts#create'  
+  delete 'accounts/:id'     =>    'ds_accounts#destroy', :as => 'delete_account'
+  get    'accounts/new'     =>    'ds_accounts#new'
+  
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

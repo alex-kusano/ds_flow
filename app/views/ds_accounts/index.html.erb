@@ -16,7 +16,7 @@
         <td><%= account.username %></td>
         <td><%= account.email %></td>
         <td><%= account.external_id %></td>
-        <td></td>
+        <td><%= link_to 'Excluir', delete_account_path(account), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
