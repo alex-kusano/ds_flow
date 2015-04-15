@@ -1,11 +1,11 @@
-<h1>Contas Docusign</h1>
+<h1>Docusign Account List</h1>
 
 <table class="table">
   <thead>
     <tr>
-      <th>Usu&aacute;rio</th>
+      <th>Username</th>
       <th>Email</th>
-      <th>Id da Conta</th>
+      <th>Account Id</th>
       <th></th>
     </tr>
   </thead>
@@ -16,13 +16,13 @@
         <td><%= account.username %></td>
         <td><%= account.email %></td>
         <td><%= account.external_id %></td>
-        <td><%= link_to 'Excluir', delete_account_path(account), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy', delete_account_path(account), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
   <tfoot>
     <tr>
-      <td colspan="4", class="text-center"><%= link_to 'Nova Conta', accounts_new_path %></td>
+      <td colspan="4", class="text-center"><%= link_to 'Register Account', accounts_new_path %></td>
     </tr>
   </tfoot>
 </table>

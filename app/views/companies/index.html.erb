@@ -1,11 +1,11 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Empresas</h1>
+<h1>Company List</h1>
 
 <table class="table">
   <thead>
     <tr>
-      <th>Nome</th>
+      <th>Name</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,15 +14,15 @@
     <% @companies.each do |company| %>
       <tr>
         <td><%= company.name %></td>
-        <td><%= link_to 'Detalhes', company %></td>
-        <td><%= link_to 'Atualizar', edit_company_path(company) %></td>
-        <td><%= link_to 'Excluir', company, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', company %></td>
+        <td><%= link_to 'Edit', edit_company_path(company) %></td>
+        <td><%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
   <tfoot>
     <tr>
-      <td colspan="4" class="text-center"><%= link_to 'Nova Empresa', new_company_path %></td>
+      <td colspan="4" class="text-center"><%= link_to 'New Company', new_company_path %></td>
     </tr>
   </tfoot>
 </table>

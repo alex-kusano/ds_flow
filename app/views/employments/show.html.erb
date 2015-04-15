@@ -1,5 +1,18 @@
 <p id="notice"><%= notice %></p>
-<h3>Procura&ccedil;&atilde;o:</h3>
+<h3>Employment:</h3>
 <hr>
-<%= link_to 'Atualizar', edit_employment_path(@employment) %> |
-<%= link_to 'Voltar', get_back_path %>
+<p>
+  <strong>Company</strong>
+  <%= @employment.company %>
+</p>
+<p>
+  <strong>Role</strong>
+  <%= @employment.role %>
+</p>
+<p>
+  <strong>Contact</strong>
+  <%= @employment.contact %>
+</p>
+
+<%= link_to 'Edit', edit_employment_path(@employment) %> |
+<%= link_to 'Back', get_back_path %>

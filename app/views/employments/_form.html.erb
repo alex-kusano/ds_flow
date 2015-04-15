@@ -12,17 +12,68 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :company, 'Empresa:' %>
+    <%= f.label :company, 'Company:' %>
     <%= f.collection_select :company_id, get_companies, :id, :to_s, :selected => get_selected_company(@employment) %>
   </div>
   <div class="field">
-    <%= f.label :role, 'Cargo:' %>
+    <%= f.label :role, 'Role:' %>
     <%= f.collection_select :role_id, get_roles, :id, :to_s, :selected => get_selected_role(@employment) %>
   </div>
   <div class="field">
-    <%= f.label :contact, 'Signatário' %>
-    <%= f.collection_select :contact_id, get_contacts, :id, :to_s, :selected => get_selected_contact(@employment) %>
+    <%= label_tag :new_contact, 'New Contact' %>
+    <%= check_box_tag :new_contact, "1", false  %>
   </div>
+
+  <div id="existing_contact">
+    <div class="field">
+      <%= f.label :contact, 'Contact' %>
+      <%= f.collection_select :contact_id, get_contacts, :id, :to_s, :selected => get_selected_contact(@employment) %>
+    </div>
+  </div>
+
+  <div id="create_contact">
+    <div class="field">
+      <%= label_tag :contact_name, 'Contact Name' %>
+      <%= text_field_tag :contact_name %>
+    </div>
+    <div class="field">
+      <%= label_tag :contact_email, 'Contact Email' %>
+      <%= text_field_tag :contact_email %>
+    </div>
+  </div>
+
+  <script>
+    $(document).ready(function() {
+      
+      toggleFields();
+      
+      function hide_fields( division ) {
+        division.hide();  
+      }
+      
+      function show_fields( division ) {
+        division.show();  
+      }
+
+      $('#new_contact').change(function() {
+        toggleFields();
+      });      
+    });
+    
+    function toggleFields() {
+      if ($("#new_contact").is(":checked")) {
+          $("#create_contact").show();
+          $("#create_contact").find("input, select, button, textarea").attr("disabled",false);
+          $("#existing_contact").hide();
+          $("#existing_contact").find("input, select, button, textarea").attr("disabled",true);
+      } else {
+          $("#create_contact").hide();
+          $("#create_contact").find("input, select, button, textarea").attr("disabled",true);
+          $("#existing_contact").show();
+          $("#existing_contact").find("input, select, button, textarea").attr("disabled",false);
+      }
+    }
+  </script>
 
   <div class="actions">
     <%= f.submit %>

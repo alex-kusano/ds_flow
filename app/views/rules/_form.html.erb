@@ -12,7 +12,7 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :rule_set, 'Classe de Regras' %>
+    <%= f.label :rule_set, 'Rule Set' %>
     <%= f.collection_select :rule_set_id, get_rule_sets, :id, :code, :selected => get_selected_rule_set(@rule) %>
   </div>
 

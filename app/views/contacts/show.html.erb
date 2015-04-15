@@ -1,9 +1,9 @@
 <p id="notice"><%= notice %></p>
 
-<h3>Signatário: <span class="small"><%= @contact.to_s %></span></h3>
+<h3>Contact: <span class="small"><%= @contact.to_s %></span></h3>
 <hr>
 <p>
-  <strong>Nome:</strong>
+  <strong>Name:</strong>
   <%= @contact.name %>
 </p>
 
@@ -12,27 +12,27 @@
   <%= @contact.email %>
 </p>
 <hr>
-<h4>Procura&ccedil;&otilde;es:</h4>
+<h4>Employments:</h4>
 <table class="table">
   <thead>
     <tr>
-      <th>Cargo</th>
-      <th>Signat&aacute;rio</th>
+      <th>Company</th>
+      <th>Role</th>
       <th></th>
     </tr>
   </thead>
   <tbody>   
     <% @employments.each do |employment| %>
     <tr>
+      <td><%= employment.company %></td>
       <td><%= employment.role %></td>
-      <td><%= employment.contact %></td>
-      <td><%= link_to 'Excluir', employment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td><%= link_to 'Destroy', employment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
     <% end %>
   </tbody>
   <tfoot>
     <tr>
-      <td colspan="3", class="text-center"><%= link_to 'Nova Procuração', new_employment_path( build_contact_params ) %></td>      
+      <td colspan="3", class="text-center"><%= link_to 'New Employment', new_employment_path( build_contact_params ) %></td>      
     </tr>
   </tfoot>
 </table>
@@ -43,5 +43,5 @@
 
 <br>
 
-<%= link_to 'Atualizar', edit_contact_path(@contact) %> |
-<%= link_to 'Voltar', contacts_path %>
+<%= link_to 'Edit', edit_contact_path(@contact) %> |
+<%= link_to 'Back', contacts_path %>

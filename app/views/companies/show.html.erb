@@ -1,21 +1,21 @@
 <p id="notice"><%= notice %></p>
 
-<h3>Empresa: <span class="small"><%= @company.to_s %></span></h3>
+<h3>Company: <span class="small"><%= @company.to_s %></span></h3>
 <hr>
 <p>
   <h4>
-    <strong>Nome:</strong>
+    <strong>Name:</strong>
     <%= @company.name %>  
   </h4>
 </p>
 
-<h4>Procura&ccedil;&otilde;es:</h4>
+<h4>Employments:</h4>
 
 <table class="table">
   <thead>
     <tr>
-      <th>Cargo</th>
-      <th>Signat&aacute;rio</th>
+      <th>Role</th>
+      <th>Contact</th>
       <th></th>
     </tr>
   </thead>
@@ -24,13 +24,13 @@
     <tr>
       <td><%= employment.role %></td>
       <td><%= employment.contact %></td>
-      <td><%= link_to 'Excluir', employment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td><%= link_to 'Destroy', employment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
     <% end %>
   </tbody>
   <tfoot>
     <tr>
-      <td colspan="3", class="text-center"><%= link_to 'Nova Procuração', new_employment_path( build_company_params ) %></td>      
+      <td colspan="3", class="text-center"><%= link_to 'New Employment', new_employment_path( build_company_params ) %></td>      
     </tr>
   </tfoot>
 </table>
@@ -40,5 +40,5 @@
 </div>
 <br>
 
-<%= link_to 'Atualizar', edit_company_path(@company) %> |
-<%= link_to 'Voltar', companies_path %>
+<%= link_to 'Edit', edit_company_path(@company) %> |
+<%= link_to 'Back', companies_path %>

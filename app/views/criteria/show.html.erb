@@ -1,16 +1,16 @@
 <p id="notice"><%= notice %></p>
 
-<h3>Crit&eacute;rio: <span class="small"><%= @criterium.to_s %></span> </h3>
+<h3>Criterium: <span class="small"><%= @criterium.to_s %></span> </h3>
 <hr>
 <p>
-  <strong>Cargo</strong>
+  <strong>Role</strong>
   <%= @criterium.role %>
 </p>
 
 <p>
-  <strong>Quantidade</strong>
+  <strong>Role Count</strong>
   <%= @criterium.count %>
 </p>
 
-<%= link_to 'Atualizar', edit_criterium_path(@criterium) %> |
-<%= link_to 'voltar', get_back_path %>
+<%= link_to 'Edit', edit_criterium_path(@criterium) %> |
+<%= link_to 'Back', get_back_path %>

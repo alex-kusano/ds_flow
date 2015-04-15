@@ -12,31 +12,31 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :company_id, 'Empresa:' %>
+    <%= f.label :company_id, 'Company:' %>
     <%= f.collection_select :company_id, get_companies, :id, :to_s, selected: get_selected_company(@category) %>    
   </div>
   <div class="field">
-    <%= f.label :datatype, 'Tipo de Classificador:' %>
+    <%= f.label :datatype, 'Tab/Field Type:' %>
     <%= f.select :datatype, get_datatypes, selected: get_selected_datatype(@category) %>        
   </div>  
   <div class="field">
-    <%= f.label :tab_name, 'Classificador:' %>
+    <%= f.label :tab_name, 'Tab/Field Name:' %>
     <%= f.text_field :tab_name %>    
   </div>
   <div class="field">
-    <%= f.label :operation, 'Operação:' %>
+    <%= f.label :operation, 'Operation:' %>
     <%= f.select :operation, get_operations, selected: get_selected_operation(@category) %>
   </div>
   <div class="field">
-    <%= f.label :tab_value, 'Parâmetro:' %>
+    <%= f.label :tab_value, 'Tab/Field Param:' %>
     <%= f.text_field :tab_value %>
   </div>
   <div class="field">
-    <%= f.label :code, 'Classe:' %>
+    <%= f.label :code, 'Category Code:' %>
     <%= f.text_field :code %>
   </div>
   <div class="field">
-    <%= f.label :parent_id, 'Super Categoria:' %>
+    <%= f.label :parent_id, 'Parent Category:' %>
     <%= f.collection_select :parent_id, get_categories, :id, :to_s, selected: get_selected_category(@category), include_blank: true  %>
   </div>
   <div class="action">

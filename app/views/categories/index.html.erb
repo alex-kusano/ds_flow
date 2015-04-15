@@ -1,13 +1,13 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Classificadores</h1>
+<h1>Category List</h1>
 
 <table class="table">
   <thead>
     <tr>
-      <th>Empresa</th>
-      <th>Classificador</th>
-      <th>Classe</th>
+      <th>Company</th>
+      <th>Qualifier</th>
+      <th>Rules</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -20,9 +20,9 @@
           <td><%= category.company %></td>
           <td><%= category.to_s %></td>
           <td><%= category.code %></td>      
-          <td><%= link_to 'Detalhes', category %></td>
-          <td><%= link_to 'Atualizar', edit_category_path(category) %></td>
-          <td><%= link_to 'Excluir', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Show', category %></td>
+          <td><%= link_to 'Edit', edit_category_path(category) %></td>
+          <td><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% else %>
         <% count = combined_categories.size %>
@@ -31,9 +31,9 @@
           <td rowspan="<%=count%>"><%= category.company %></td>
           <td><%= first[0] %></td>
           <td><%= first[1] %></td>      
-          <td rowspan="<%=count%>"><%= link_to 'Detalhes', category %></td>
-          <td rowspan="<%=count%>"><%= link_to 'Atualizar', edit_category_path(category) %></td>
-          <td rowspan="<%=count%>"><%= link_to 'Excluir', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td rowspan="<%=count%>"><%= link_to 'Show', category %></td>
+          <td rowspan="<%=count%>"><%= link_to 'Update', edit_category_path(category) %></td>
+          <td rowspan="<%=count%>"><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
         <% combined_categories.each do |combination| %>
           <tr>
@@ -46,7 +46,7 @@
   </tbody>
   <tfoot>
     <tr>
-      <td colspan="9" class="text-center"><%= link_to 'Novo Classificador', new_category_path %></td>
+      <td colspan="9" class="text-center"><%= link_to 'New Category', new_category_path %></td>
     </tr>
   </tfoot>
 </table>

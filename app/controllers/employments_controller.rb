@@ -24,6 +24,11 @@ class EmploymentsController < ApplicationController
   # POST /employments
   # POST /employments.json
   def create
+    
+    handle_new_contact
+    
+    render json: employment_params
+    
     @employment = Employment.new(employment_params)
 
     respond_to do |format|
@@ -40,6 +45,9 @@ class EmploymentsController < ApplicationController
   # PATCH/PUT /employments/1
   # PATCH/PUT /employments/1.json
   def update
+    
+    handle_new_contact
+    
     respond_to do |format|
       if @employment.update(employment_params)
         format.html { redirect_to @employment, notice: 'Employment was successfully updated.' }
@@ -62,6 +70,13 @@ class EmploymentsController < ApplicationController
   end
 
   private
+    def handle_new_contact
+      unless params[:new_contact].blank?
+        contact = Contact.where( name: params[:contact_name], email: params[:contact_email] ).first_or_create
+        params[:employment][:contact_id] = contact.id
+      end
+    end
+  
     # Use callbacks to share common setup or constraints between actions.
     def set_employment
       @employment = Employment.find(params[:id])
