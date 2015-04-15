@@ -15,13 +15,43 @@ class Category < ActiveRecord::Base
   belongs_to   :company
   has_many     :subcategories,     class_name: "Category",  foreign_key: "parent_id"
   belongs_to   :parent,            class_name: "Category"
+  has_one      :rule_set,          foreign_key: 'code', class_name: 'RuleSet', primary_key: 'code'
   
   scope        :root_categories,  -> { where( parent_id: nil ) }
   
   def to_s
     "#{tab_name} #{operation_string} #{tab_value}"
   end
+  
+  def combined_strings
+    combination = []
     
+    subcategories.each do |subcategory|
+      inner_comb = subcategory.combined_strings
+      inner_comb.each do |comb|
+        combination.push( [ "#{self.to_s} & #{comb[0]}", comb[1] ] )
+      end
+    end
+    
+    unless code.blank?
+      combination.push( [ self.to_s, rule_set.to_s ] )
+    end
+    
+    return combination
+  end
+
+  def combined_super
+    
+    if parent.nil?
+      ""
+    elsif parent.parent.nil?
+      parent.to_s
+    else
+      "#{parent.combined_super} & #{parent.to_s}"
+    end
+    
+  end
+
   def operation_string
     case operation
       when EQUAL_TO

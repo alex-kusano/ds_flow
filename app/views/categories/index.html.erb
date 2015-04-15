@@ -6,10 +6,7 @@
   <thead>
     <tr>
       <th>Empresa</th>
-      <th>Tipo de Classificador</th>      
       <th>Classificador</th>
-      <th>Opera&ccedil;&atilde;o</th>
-      <th>Parâmetro</th>
       <th>Classe</th>
       <th colspan="3"></th>
     </tr>
@@ -17,17 +14,34 @@
 
   <tbody>
     <% @categories.each do |category| %>
-      <tr>
-        <td><%= category.company %></td>
-        <td><%= category.datatype_string %></td>
-        <td><%= category.tab_name %></td>
-        <td><%= category.operation_string %></td>
-        <td><%= category.tab_value %></td>
-        <td><%= category.code %></td>      
-        <td><%= link_to 'Detalhes', category %></td>
-        <td><%= link_to 'Atualizar', edit_category_path(category) %></td>
-        <td><%= link_to 'Excluir', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <% combined_categories = category.combined_strings %>
+      <% if combined_categories.empty? %>
+        <tr>
+          <td><%= category.company %></td>
+          <td><%= category.to_s %></td>
+          <td><%= category.code %></td>      
+          <td><%= link_to 'Detalhes', category %></td>
+          <td><%= link_to 'Atualizar', edit_category_path(category) %></td>
+          <td><%= link_to 'Excluir', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% else %>
+        <% count = combined_categories.size %>
+        <% first = combined_categories.shift %>
+        <tr>
+          <td rowspan="<%=count%>"><%= category.company %></td>
+          <td><%= first[0] %></td>
+          <td><%= first[1] %></td>      
+          <td rowspan="<%=count%>"><%= link_to 'Detalhes', category %></td>
+          <td rowspan="<%=count%>"><%= link_to 'Atualizar', edit_category_path(category) %></td>
+          <td rowspan="<%=count%>"><%= link_to 'Excluir', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+        <% combined_categories.each do |combination| %>
+          <tr>
+            <td><%= combination[0] %></td>
+            <td><%= combination[1] %></td>
+          </tr>
+        <% end %>    
+      <% end %>
     <% end %>
   </tbody>
   <tfoot>

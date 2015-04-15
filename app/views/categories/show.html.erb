@@ -37,7 +37,7 @@
 <% unless @category.parent.nil? %>
 <p>
   <strong>Supercategoria:</strong>
-  <%= @category.parent %>
+  <%= @category.combined_super %>
 </p>
 <% end %>
 
@@ -47,26 +47,42 @@
   <table class="table">
     <thead>
       <tr>
-        <th>Tipo de Classificador</th>
+        <th>Empresa</th>
         <th>Classificador</th>
-        <th>Opera&ccedil;&atilde;o</th>
-        <th>Par&acirc;metro</th>
         <th>Classe</th>
         <th colspan="3"></th>
       </tr>
     </thead>
     <tbody>
       <% @subcategories.each do |subcategory| %>
-      <tr>
-        <td><%= subcategory.datatype_string %></td>
-        <td><%= subcategory.tab_name %></td>
-        <td><%= subcategory.operation_string %></td>
-        <td><%= subcategory.tab_value %></td>
-        <td><%= subcategory.code %></td>
-        <td><%= link_to 'Detalhes', category_path( build_category_params subcategory ) %></td>
-        <td><%= link_to 'Atualizar', edit_category_path( build_category_params subcategory ) %></td>
-        <td><%= link_to 'Excluir', subcategory, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+        <% combined_categories = subcategory.combined_strings %>
+        <% if combined_categories.empty? %>
+          <tr>
+            <td><%= subcategory.company %></td>
+            <td><%= subcategory.to_s %></td>
+            <td><%= subcategory.code %></td>      
+            <td><%= link_to 'Detalhes', category_path( build_category_params subcategory ) %></td>
+            <td><%= link_to 'Atualizar', edit_category_path(subcategory) %></td>
+            <td><%= link_to 'Excluir', subcategory, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% else %>
+          <% count = combined_categories.size %>
+          <% first = combined_categories.shift %>
+          <tr>
+            <td rowspan="<%=count%>"><%= subcategory.company %></td>
+            <td><%= first[0] %></td>
+            <td><%= first[1] %></td>      
+            <td rowspan="<%=count%>"><%= link_to 'Detalhes', category_path( build_category_params subcategory )  %></td>
+            <td rowspan="<%=count%>"><%= link_to 'Atualizar', edit_category_path(subcategory) %></td>
+            <td rowspan="<%=count%>"><%= link_to 'Excluir', subcategory, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+          <% combined_categories.each do |combination| %>
+            <tr>
+              <td><%= combination[0] %></td>
+              <td><%= combination[1] %></td>
+            </tr>
+          <% end %>    
+        <% end %>
       <% end %>
     </tbody>
     <tfoot>
