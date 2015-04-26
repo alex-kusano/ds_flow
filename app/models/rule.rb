@@ -1,7 +1,12 @@
 class Rule < ActiveRecord::Base
+  # ASSOCIATIONS
   belongs_to :rule_set
   has_many   :criteria
   
+  #VALIDATIONS
+  validates    :rule_set, presence: true
+  
+  # UTITLITY METHODS
   def to_s
     if criteria.blank?
       "No Criteria!"

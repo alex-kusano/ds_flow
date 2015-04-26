@@ -1,4 +1,5 @@
 class Category < ActiveRecord::Base
+  # CONSTANTS
   EQUAL_TO               = 0
   LESS_THAN              = 1
   LESS_THAN_OR_EQUAL     = 2
@@ -12,13 +13,24 @@ class Category < ActiveRecord::Base
   DATE                   = 3
   NIL                    = 4
   
+  # ASSOCIATIONS
   belongs_to   :company
   has_many     :subcategories,     class_name: "Category",  foreign_key: "parent_id"
   belongs_to   :parent,            class_name: "Category"
   has_one      :rule_set,          foreign_key: 'code', class_name: 'RuleSet', primary_key: 'code'
   
+  # VALIDATION
+  validates    :tab_name, :datatype, :operation, :company_id, presence: true
+  validates    :operation, inclusion: { in: [EQUAL_TO, LESS_THAN, LESS_THAN_OR_EQUAL, GREATER_THAN, GREATER_THAN_OR_EQUAL, NOT_EQUAL ] }
+  validates    :datatype, inclusion: { in: [STRING, INTEGER, FLOAT, DATE, NIL ] } 
+  validate     :matchesParentCompany?, :valueIsPresent?
+  
+  # SCOPES
   scope        :root_categories,  -> { where( parent_id: nil ) }
   
+  # DATA ACCESS METHODS
+  
+  # UTILITY METHODS
   def to_s
     "#{tab_name} #{operation_string} #{tab_value}"
   end
@@ -87,6 +99,23 @@ class Category < ActiveRecord::Base
         "Unknown Datatype"
     end
   end
+
+  def valueIsPresent?
+    if datatype != NIL && tab_value.blank?
+      errors.add(:tab_value, "Must be present unless datatype is 'NIL'") 
+    end
+  end
+
+  def matchesParentCompany?
+    unless parent.nil? || parent.company_id == company_id 
+      errors.add(:company, "Must match parent Company") 
+    end
+  end
+
+  #########################################################################
+  # Making Constants "Public"
+  #########################################################################
+
   
   def self.EQUAL_TO
     EQUAL_TO

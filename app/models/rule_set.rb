@@ -1,8 +1,14 @@
 class RuleSet < ActiveRecord::Base
+  # ASSOCIATIONS
   has_many :rules
   
+  # VALIDATIONS
+  validates      :code, presence: true
+  
+  #SCOPES
   scope :by_code, -> param { where( RuleSet.arel_table[:code].matches("%#{param}%") ) }
   
+  # UTITLITY METHODS
   def validate_rule_set( count_map )
     
     rules.each do |rule|

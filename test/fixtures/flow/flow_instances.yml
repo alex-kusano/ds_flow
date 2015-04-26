@@ -1,9 +1,14 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  code: MyString
-  envelope_id: MyString
+instance_A:
+  code: CA
+  envelope_id: fb2eebb1-654a-4fb1-b570-7393fc227bc2
+  routing_order: 1
+  company: company_A
 
-two:
-  code: MyString
-  envelope_id: MyString
+instance_B:
+  code: CB
+  envelope_id: fb2eebb1-654a-4fb1-b570-7393fc227bc2
+  routing_order: 1
+  complete_date: 2015-04-14 23:44:23
+  company: company_B

@@ -1,13 +1,24 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 string_cat:
-  tab_name: AUTO_STRING
-  tab_value: a string
+  company: company_A
+  tab_name: Parent Name
+  tab_value: Parent Value
   datatype: 0
   operation: 0
 
+child_cat:
+  company: company_A
+  tab_name: Child Name
+  tab_value: Child Value
+  datatype: 0
+  operation: 0
+  parent: string_cat
+
 number_cat:
+  company: company_B
   tab_name: AUTO_NUMBER
   tab_value: 123
-  datatype: 2
+  datatype: 2  
   operation: 2
+  

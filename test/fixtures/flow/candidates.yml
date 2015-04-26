@@ -1,11 +1,12 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  flow_instance_id: 
-  routing_order: 1
-  employment_id: 
-
-two:
-  flow_instance_id: 
-  routing_order: 1
-  employment_id: 
+candidate_A:
+  flow_instance: instance_A
+  employment: employment_A
+  recipient_id: e15e9e99-88c7-4d4f-9276-6e0800ba5eda
+  
+candidate_B:
+  flow_instance: instance_B
+  employment: employment_B
+  sign_date: 2015-04-14 17:43:11
+  recipient_id: e15e9e99-88c7-4d4f-9276-6e0800ba5edb

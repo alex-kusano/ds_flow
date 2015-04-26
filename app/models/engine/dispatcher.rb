@@ -67,7 +67,7 @@ class Dispatcher
     response.body    
   end
   
-  def create_connect_config( account_info, name, publish_url, recipient_events ) 
+  def create_connect_config( account_info, name, publish_url, recipient_events, envelope_events = [] ) 
     
     
     body =  "{"
@@ -78,6 +78,7 @@ class Dispatcher
     body <<    "\"includeDocuments\" : \"false\","
     body <<    "\"includeSenderAccountasCustomField\" : \"true\","
     body <<    "\"recipientEvents\" : \"#{recipient_events.join(",")}\","
+    body <<    "\"envelopeEvents\" : \"#{envelope_events.join(",")}\","    
     body <<    "\"urlToPublishTo\" : \"#{publish_url}\""    
     body << "}"
   

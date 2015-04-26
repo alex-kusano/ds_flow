@@ -52,6 +52,19 @@ class FlowHandler
     @result    
   end
   
+  def envelope_cancelled( envelope_info )
+    envelope_id = envelope_info.envelope_id
+    flow_instances = Flow::FlowInstance.where( envelope_id: envelope_id, complete_date: nil )
+    
+    flow_instances.each do |flow_instance|
+    
+      pending_candidates = get_pending_candidates( flow_instance ).to_a
+      Flow::Candidate.delete( pending_candidates )
+      flow_instance.complete_date = DateTime.now
+      flow_instance.save      
+    end
+  end
+  
   
   def handle_agent_automation( agent, envelope_info, tabs )
     

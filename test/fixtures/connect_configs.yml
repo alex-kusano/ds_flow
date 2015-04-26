@@ -1,9 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  connect_id: 1
-  account_id: 1
-
-two:
-  connect_id: 1
+configA:
+  send_interface_id: 1
+  sign_interface_id: 2
   account_id: 1

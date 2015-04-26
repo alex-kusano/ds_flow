@@ -64,6 +64,7 @@ class AccountHandler
       csign_response = Dispatcher.instance.create_connect_config( account, 
                                                                   "Campari_Sign", 
                                                                   "#{event_handler_path}/signed",
+                                                                  ["Declined","Voided"],
                                                                   ["Completed"] )
       
       unless ( csend_response.nil? || csign_response.nil? )

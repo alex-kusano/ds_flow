@@ -18,9 +18,15 @@ class Api::ConnectController < ApplicationController
   
   def signed
     envelope_info = EnvelopeInformation.new ( params[:DocuSignEnvelopeInformation] )
+    status = envelope_info.envelope_status
     
     flow_handler = FlowHandler.instance
-    result = flow_handler.envelope_signed( envelope_info )
+    if( status == 'Voided' || status = 'Rejected' )
+      result = flow_handler.envelope_cancelled( envelope_info )
+    else
+      result = flow_handler.envelope_signed( envelope_info )
+    end
+    
     
     render json: result
   end

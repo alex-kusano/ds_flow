@@ -1,9 +1,26 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  role: 
+criterium_A:
+  rule: rule_A
+  role: role_A
+  count: 1 
+  
+criterium_B:
+  rule: rule_B
+  role: role_B
   count: 1
-
-two:
-  role: 
+  
+criterium_C:
+  rule: rule_C
+  role: role_A
+  count: 2
+  
+criterium_D:
+  rule: rule_D
+  role: role_B
+  count: 1 
+  
+criterium_E:
+  rule: rule_B
+  role: role_A
   count: 1
