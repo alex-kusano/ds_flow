@@ -27,8 +27,6 @@ class EmploymentsController < ApplicationController
     
     handle_new_contact
     
-    render json: employment_params
-    
     @employment = Employment.new(employment_params)
 
     respond_to do |format|

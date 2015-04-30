@@ -32,8 +32,9 @@ class Dispatcher
     Net::HTTP.start( uri.host, uri.port, :use_ssl => uri.scheme == 'https') do |http|
       request = Net::HTTP::Post.new( uri, get_headers(auth) )
 
-      return response = http.request( request, body ) # Net::HTTPResponse object
-    end      
+      response = http.request( request, body ) # Net::HTTPResponse object
+      response.body
+    end
   end
   
   def delete_recipients( account_info, envelope_id, recipients = [], sender )
@@ -62,9 +63,9 @@ class Dispatcher
     Net::HTTP.start( uri.host, uri.port, :use_ssl => uri.scheme == 'https') do |http|
       request = Net::HTTP::Delete.new( uri, get_headers(auth) )
 
-      return response = http.request( request, body ) # Net::HTTPResponse object
-    end 
-    response.body    
+      response = http.request( request, body ) # Net::HTTPResponse object
+      response.body
+    end  
   end
   
   def create_connect_config( account_info, name, publish_url, recipient_events, envelope_events = [] ) 
@@ -103,8 +104,8 @@ class Dispatcher
     end      
   end
 
-def delete_connect_config( account_info, connect_id ) 
-    
+  def delete_connect_config( account_info, connect_id ) 
+      
     body = ""
     
     uri = URI.parse("#{account_info.base_url}/connect/#{connect_id}")
@@ -118,8 +119,8 @@ def delete_connect_config( account_info, connect_id )
   
     Net::HTTP.start( uri.host, uri.port, :use_ssl => uri.scheme == 'https') do |http|
       request = Net::HTTP::Delete.new( uri, get_headers(auth) )
-
-      return response = http.request( request, body ) # Net::HTTPResponse object
+  
+      response = http.request( request, body ) # Net::HTTPResponse object
     end
   
     if response.is_a? Net::HTTPSuccess

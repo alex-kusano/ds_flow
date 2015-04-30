@@ -47,7 +47,7 @@ class FlowHandler
         flow_instance.complete_date = DateTime.now
         flow_instance.save
       end
-    end 
+    end
     
     @result    
   end
@@ -58,32 +58,85 @@ class FlowHandler
     
     flow_instances.each do |flow_instance|
     
-      pending_candidates = get_pending_candidates( flow_instance ).to_a
-      Flow::Candidate.delete( pending_candidates )
+      pending_candidates = get_pending_candidates( flow_instance )
+      pending_candidates.destroy_all 
       flow_instance.complete_date = DateTime.now
       flow_instance.save      
     end
   end
   
+  def employment_created( employment )
+    
+    company = employment.company
+    
+    flow_instances = Flow::FlowInstance.where( company: company )
+    
+    flow_instances.each do | flow_instance |
+      
+      account_info = DsAccount.find_by( external_id: flow_instance.account_id )
+      
+      candidate = flow_instance.candidates.create( employment: employment, recipient_id: UUIDTools::UUID.random_create.to_s )
+      
+      Dispatcher.instance.add_candidates( account_info,
+                                          flow_instance.envelope_id,
+                                          [ candidate ],
+                                          flow_instance.sender.email )
+      
+    end
+    
+  end
+
+  def employment_updated( employment )
+    
+    if employment.company_changed? 
+      employment_destroyed( employment )
+      employment_created( employment )
+    end
+    
+  end
+  
+  def employment_destroyed( employment )
+    
+    candindancies = Flow::Candidate.where( employment: employment )
+    
+    candindancies.each do |candidancy|
+      
+      flow_instance = candidancy.flow_instance
+      account_info = DsAccount.find_by( external_id: flow_instance.account_id )
+      
+      Dispatcher.instance.delete_recipients( account_info, 
+                                             flow_instance.envelope_id, 
+                                             [ candidancy ], 
+                                             flow_instance.sender.email )
+      candidancy.destroy
+    end
+    
+  end
+  
+  
+  ###################################################################
+  private
+  ###################################################################
   
   def handle_agent_automation( agent, envelope_info, tabs )
     
     company = Company.find_by( name: agent.contact.name )
     
     unless company.nil?
-      envelope_id = envelope_info.envelope_id
-     
+      
       matcher = CategoryMatcher.instance
       code = matcher.get_category_code( company, tabs )
       unless code.nil?
         
+        account_id = envelope_info.get_envelope_param( "AccountId" ).to_i
         routing_order = agent.routing_order
-        flow_instance = Flow::FlowInstance.where( code: code, envelope_id: envelope_id, 
-                                                  routing_order: routing_order, company: company ).first_or_create
+        
+        flow_instance = Flow::FlowInstance.where( code: code, envelope_id: envelope_info.envelope_id,
+                                                  routing_order: routing_order, company: company,
+                                                  account_id: account_id, sender: envelope_info.sender ).first_or_create
         
         candidates = retrieve_candidates( flow_instance )
-
-        account_id = envelope_info.get_envelope_param( "AccountId" ).to_i
+        
         sender = envelope_info.sender.email
         
         account_info = DsAccount.find_by( external_id: account_id )
@@ -102,8 +155,6 @@ class FlowHandler
     recipient_ids = pending_candidates.collect do |candidate|
       candidate.recipient_id
     end
-    
-    routing_order = 0
     
     signers = envelope_info.get_recipients( type: 'Signer', status: 'Completed', orig_id: recipient_ids )
     
@@ -131,9 +182,11 @@ class FlowHandler
     flow_instance.candidates.create( candidates )
   end
   
+  
+  
   def get_pending_candidates( flow_instance )
     
-    pending_candidates = Flow::Candidate.where( flow_instance: flow_instance, sign_date: nil )
+    Flow::Candidate.where( flow_instance: flow_instance, sign_date: nil )
     
   end
   
@@ -166,6 +219,6 @@ class FlowHandler
     
     dispatcher = Dispatcher.instance   
     @result = dispatcher.delete_recipients( account_info, flow_instance.envelope_id, pending_candidates, sender )
-    Flow::Candidate.delete( pending_candidates )
+    pending_candidates.destroy_all
   end
 end

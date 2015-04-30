@@ -1,6 +1,6 @@
 class Contact < ActiveRecord::Base
   # ASSOCIATIONS
-  has_many  :employments
+  has_many  :employments, dependent: :destroy
   
   # VALIDATIONS
   validates      :name, :email, presence: true

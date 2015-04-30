@@ -1,6 +1,6 @@
 class Company < ActiveRecord::Base
   # ASSOCIATIONS
-  has_many  :employments
+  has_many  :employments, dependent: :destroy
   has_many  :categories, -> { where(parent_id: nil) }
   
   # VALIDATIONS

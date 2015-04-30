@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150409033151) do
+ActiveRecord::Schema.define(version: 20150428171728) do
 
   create_table "categories", force: true do |t|
     t.integer  "company_id"
@@ -105,9 +105,12 @@ ActiveRecord::Schema.define(version: 20150409033151) do
     t.integer  "routing_order"
     t.datetime "complete_date"
     t.integer  "company_id"
+    t.integer  "account_id"
+    t.integer  "sender_id"
   end
 
   add_index "flow_flow_instances", ["code", "envelope_id"], name: "index_flow_flow_instances_on_code_and_envelope_id"
+  add_index "flow_flow_instances", ["sender_id"], name: "index_flow_flow_instances_on_sender_id"
 
   create_table "roles", force: true do |t|
     t.string   "name"
