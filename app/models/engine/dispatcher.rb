@@ -112,7 +112,7 @@ class Dispatcher
     
     auth = { token: account_info.token }
     
-    Rails.logger.debug( "POST to #{uri.to_s}" )
+    Rails.logger.debug( "DELETE to #{uri.to_s}" )
     Rails.logger.debug( "######################################" )
     Rails.logger.debug( body )
     Rails.logger.debug( "######################################" )
@@ -121,13 +121,12 @@ class Dispatcher
       request = Net::HTTP::Delete.new( uri, get_headers(auth) )
   
       response = http.request( request, body ) # Net::HTTPResponse object
-    end
-  
-    if response.is_a? Net::HTTPSuccess
-      return JSON.parse( response.body )
-    else
-      return nil
-    end
+      if response.is_a? Net::HTTPSuccess
+        return response.message
+      else
+        return nil
+      end
+    end  
   end
 
   def update_connect_users( account_info, connect_id, user_ids ) 

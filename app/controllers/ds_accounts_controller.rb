@@ -11,16 +11,16 @@ class DsAccountsController < ApplicationController
     
     login_info = handler.login( params[:email], params[:password], params[:key] )
     if login_info.nil?
-      redirect_to accounts_register_path notice: 'Login Failed!'
+      redirect_to accounts_new_path notice: 'Login Failed!'
+      return
     end
     
     ds_account = handler.register( login_info )
     if ds_account.nil?
       redirect_to accounts_path notice: 'User is already registered!'
+      return
     end
-    
     handler.update_connect_config( ds_account, api_connect_url )
-    
     redirect_to accounts_path, notice: 'User registered successfully.'
   end
   
