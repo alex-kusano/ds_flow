@@ -4,7 +4,7 @@ class RulesController < ApplicationController
   # GET /rules
   # GET /rules.json
   def index
-    @rules = Rule.page(params[:page])
+    @rules = Rule.page(params[:page]).per(10)
   end
 
   # GET /rules/1

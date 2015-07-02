@@ -15,7 +15,7 @@ class Category < ActiveRecord::Base
   
   # ASSOCIATIONS
   belongs_to   :company
-  has_many     :subcategories,     class_name: "Category",  foreign_key: "parent_id"
+  has_many     :subcategories,     -> { order(:priority) }, class_name: "Category",  foreign_key: "parent_id"
   belongs_to   :parent,            class_name: "Category"
   has_one      :rule_set,          foreign_key: 'code', class_name: 'RuleSet', primary_key: 'code'
   
@@ -26,7 +26,7 @@ class Category < ActiveRecord::Base
   validate     :matchesParentCompany?, :valueIsPresent?
   
   # SCOPES
-  scope        :root_categories,  -> { where( parent_id: nil ) }
+  scope        :root_categories,  -> { where( parent_id: nil ).order(:company_id, :priority) }
   
   # DATA ACCESS METHODS
   

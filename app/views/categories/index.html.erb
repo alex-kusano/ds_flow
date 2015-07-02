@@ -5,9 +5,10 @@
 <table class="table">
   <thead>
     <tr>
-      <th>Company</th> 
+      <th>Company</th>       
       <th>Qualifier</th>
       <th>Rules</th>
+      <th>Priority</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -19,7 +20,8 @@
         <tr>
           <td><%= category.company %></td>
           <td><%= category.to_s %></td>
-          <td><%= category.code %></td>      
+          <td><%= category.code %></td>
+          <td><%= category.priority %></td>
           <td><%= link_to 'Show', category %></td>
           <td><%= link_to 'Edit', edit_category_path(category) %></td>
           <td><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -30,7 +32,8 @@
         <tr>
           <td rowspan="<%=count%>"><%= category.company %></td>
           <td><%= first[0] %></td>
-          <td><%= first[1] %></td>      
+          <td><%= first[1] %></td> 
+          <td rowspan="<%=count%>"><%= category.priority %></td>
           <td rowspan="<%=count%>"><%= link_to 'Show', category %></td>
           <td rowspan="<%=count%>"><%= link_to 'Update', edit_category_path(category) %></td>
           <td rowspan="<%=count%>"><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -38,7 +41,7 @@
         <% combined_categories.each do |combination| %>
           <tr>
             <td><%= combination[0] %></td>
-            <td><%= combination[1] %></td>
+            <td><%= combination[1] %></td>            
           </tr>
         <% end %>    
       <% end %>
