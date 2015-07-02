@@ -10,7 +10,7 @@ class RulesController < ApplicationController
   # GET /rules/1
   # GET /rules/1.json
   def show
-    @criteria = @rule.criteria.page(params[:page]).per(2)
+    @criteria = @rule.criteria.page(params[:page]).per(10)
   end
 
   # GET /rules/new
