@@ -21,7 +21,7 @@ class Api::ConnectController < ApplicationController
     status = envelope_info.envelope_status
     
     flow_handler = FlowHandler.instance
-    if( status == 'Voided' || status = 'Rejected' )
+    if( status == 'Voided' || status == 'Rejected' )
       result = flow_handler.envelope_cancelled( envelope_info )
     else
       result = flow_handler.envelope_signed( envelope_info )

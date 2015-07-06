@@ -179,7 +179,7 @@ class FlowHandler
       { employment: employment, recipient_id: UUIDTools::UUID.random_create.to_s }
     end
     
-    flow_instance.candidates.create( candidates )
+    flow_instance.candidates.create!( candidates )
   end
   
   
@@ -219,6 +219,8 @@ class FlowHandler
     
     dispatcher = Dispatcher.instance   
     @result = dispatcher.delete_recipients( account_info, flow_instance.envelope_id, pending_candidates, sender )
-    pending_candidates.destroy_all
+    pending_candidates.each do |candidate| 
+      candidate.destroy
+    end
   end
 end
