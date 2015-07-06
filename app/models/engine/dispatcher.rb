@@ -24,7 +24,7 @@ class Dispatcher
     
     auth = { token: account_info.token, sobo: sender }
     
-    Rails.logger.debug( "POST to #{uri.to_s}" )
+    Rails.logger.info( "POST to #{uri.to_s}" )
     Rails.logger.debug( "######################################" )
     Rails.logger.debug( body )
     Rails.logger.debug( "######################################" )
@@ -55,7 +55,7 @@ class Dispatcher
     
     auth = { token: account_info.token, sobo: sender }
     
-    Rails.logger.debug( "DELETE to #{uri.to_s}" )
+    Rails.logger.info( "DELETE to #{uri.to_s}" )
     Rails.logger.debug( "######################################" )
     Rails.logger.debug( body )
     Rails.logger.debug( "######################################" )
@@ -86,7 +86,7 @@ class Dispatcher
     auth = { token: account_info.token }
     uri = URI.parse("#{account_info.base_url}/connect")
   
-    Rails.logger.debug( "POST to #{uri.to_s}" )
+    Rails.logger.info( "POST to #{uri.to_s}" )
     Rails.logger.debug( "######################################" )
     Rails.logger.debug( body )
     Rails.logger.debug( "######################################" )
@@ -112,7 +112,7 @@ class Dispatcher
     
     auth = { token: account_info.token }
     
-    Rails.logger.debug( "DELETE to #{uri.to_s}" )
+    Rails.logger.info( "DELETE to #{uri.to_s}" )
     Rails.logger.debug( "######################################" )
     Rails.logger.debug( body )
     Rails.logger.debug( "######################################" )
@@ -139,7 +139,7 @@ class Dispatcher
     auth = { token: account_info.token }
     uri = URI.parse("#{account_info.base_url}/connect")
 
-    Rails.logger.debug( "POST to #{uri.to_s}" )
+    Rails.logger.info( "POST to #{uri.to_s}" )
     Rails.logger.debug( "######################################" )
     Rails.logger.debug( body )
     Rails.logger.debug( "######################################" )
@@ -160,7 +160,7 @@ class Dispatcher
   def create_token( email, password, integrator_key, server = "demo.docusign.net", version = "v2" )
     uri = URI.parse("https://#{server}/restapi/#{version}/oauth2/token")
     
-    Rails.logger.debug( "Form POST to #{uri.to_s}" )
+    Rails.logger.info( "Form POST to #{uri.to_s}" )
     response = Net::HTTP.post_form(uri, "grant_type" => "password",
                                         "client_id" => integrator_key,
                                         "username" => email,
@@ -177,7 +177,7 @@ class Dispatcher
   def delete_token( ds_account, server = "demo.docusign.net", version = "v2" )
     uri = URI.parse("https://#{server}/restapi/#{version}/oauth2/revoke")
     
-    Rails.logger.debug( "Form POST to #{uri.to_s}" )
+    Rails.logger.info( "Form POST to #{uri.to_s}" )
     response = Net::HTTP.post_form(uri, "token" => "#{ds_account.token}" )
     
     return response.is_a? Net::HTTPSuccess
@@ -188,7 +188,7 @@ class Dispatcher
     
     headers = get_headers( email: email, password: password, integrator_key: integrator_key )
     
-    Rails.logger.debug( "GET to #{uri.to_s}" )
+    Rails.logger.info( "GET to #{uri.to_s}" )
     Net::HTTP.start( uri.host, uri.port, :use_ssl => uri.scheme == 'https') do |http|
       request = Net::HTTP::Get.new( uri, headers )
       response = http.request( request ) # Net::HTTPResponse object

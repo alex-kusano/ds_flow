@@ -8,7 +8,7 @@ class Flow::Candidate < ActiveRecord::Base
   has_one :contact,  through: :employment
   
   # VALIDATIONS
-  validates      :flow_instance, :employment, :recipient_id, presence: true
+  #validates      :flow_instance, :employment, :recipient_id, presence: true
   
   def type 
     'Signer'
